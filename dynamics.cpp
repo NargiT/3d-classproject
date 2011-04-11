@@ -97,7 +97,12 @@ void Dynamics::initFromDOMElement(const QDomElement& e)
 
 	addObject(t1); addObject(t2);
   
-  addSpring(0, 1, 15, 3, 4);
+	//float stiffness = 30.0f;
+	//float initLength = 0.2f;
+	//float damping = 0.2f;
+	//float viscosity = 0.1f;
+	//addSpring(unsigned int ball1, unsigned  int ball2, float stiffness, float initLength, float dampingFactor)
+  	addSpring(0, 1, stiffness, initLength, damping);
 }
 
 /////////////////////////
