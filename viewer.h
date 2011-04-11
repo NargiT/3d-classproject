@@ -32,12 +32,11 @@ protected :
 
   Scene* scene() { return scene_; };
 
-  float time;
-
 private:
-  // Definit la position F1 comme étant celle de la camera.
+  // Definit la position F1 comme ï¿½tant celle de la camera.
   void initFromScene();
 
+  float time;
   Scene* scene_;
   RayTracer rayTracer_;
   Ray _ray;

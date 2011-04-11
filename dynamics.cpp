@@ -39,7 +39,7 @@ void Dynamics::draw() const
 		Vec pos2 = getBallPos(obj2);
 		glVertex3f(pos1.x, pos1.y, pos1.z);
 		glVertex3f(pos2.x, pos2.y, pos2.z);
-	}		
+	}
 	glEnd();
 	glMultMatrixd(_manipulated_frame.matrix());
 	QGLViewer::drawAxis();

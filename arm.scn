@@ -5,6 +5,10 @@
       <position x="0.0" y="0.0" z="0.0"/>
       <orientation q0="0" q1="0" q2="0" q3="1" />
     </Frame>
+    <AxisAngleKeyFrame x="0.0" y="0.0" z="0.0" angle = "0.0" time="0.0"/>
+    <AxisAngleKeyFrame x="1.4" y="1.4" z="1.4" angle = "0.5" time="25.0"/>
+    <AxisAngleKeyFrame x="0.0" y="0.0" z="0.0" angle = "0.0" time="50.0"/>
+    <AxisAngleKeyFrame x="1.4" y="1.4" z="1.4" angle = "0.5" time="75.0"/>
 
     <Sphere radius="0.25">
       <Material>

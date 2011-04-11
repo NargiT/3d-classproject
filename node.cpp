@@ -62,22 +62,12 @@ void Node::draw() const
 
 void Node::animate(float time)
 {
-	// Apply the transform
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glMultMatrixd(frame_.matrix());
-  
-  Object::animate(time);
+    Object::animate(time);
 
-	// Display the leaves of this node
-	std::list<Object*>::iterator iter = _leaves.begin();
-	for(; iter != _leaves.end(); iter++)
-	{
-		(*iter)->animate(time);
-	}
-	
-	// Go back to the father's frame
-	glPopMatrix();
+    std::list<Object*>::const_iterator iter = _leaves.begin();
+    for (; iter != _leaves.end(); iter++) {
+        (*iter)->animate(time);
+    }
 }
 
 
