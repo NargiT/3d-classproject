@@ -82,5 +82,6 @@ void Object::animate(float time) {
         float t = (time - t1) / (t2 - t1);
         Quaternion q = Quaternion::slerp(q1, q2, t, true);
         frame_.setRotation(q);
+	//frame_.setTranslation(2,3,1);
     }
 }

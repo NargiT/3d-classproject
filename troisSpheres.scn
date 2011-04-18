@@ -12,6 +12,8 @@
         <position x="-0.4" y="-0.4" z="0.4" />
         <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0" />
       </Frame>
+	<AxisAngleKeyFrame x="1.0" y="0.0" z="0.0" angle = "0.5" time="10"/>
+	<AxisAngleKeyFrame x="3.0" y="0.0" z="0.0" angle = "0.5" time="20"/>
     </Sphere>
 
     <Sphere radius="0.3">

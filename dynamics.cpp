@@ -82,7 +82,9 @@ void Dynamics::initFromDOMElement(const QDomElement& e)
 	
 	// add a second ball
 	Vec position  = initPos + Vec(0.0f, -2.0f*radius, 0.0f);
+	Vec position2  = position + Vec(0.0f, -2.0f*radius, 0.0f);
 	unsigned int ball2 = addBall(position, Vec(0.0f, 1.0f, 0.0f), mass, radius);
+	//unsigned int ball3 = addBall(position2, Vec(0.0f, 0.5f, 1.0f), mass, radius);
 
 	// add 2 triangles to represent the ground plane (for collisions)
 	Vec a = groundPosition + Vec(-10.0f, 10.0f, 0.0f);
@@ -97,11 +99,6 @@ void Dynamics::initFromDOMElement(const QDomElement& e)
 
 	addObject(t1); addObject(t2);
   
-	//float stiffness = 30.0f;
-	//float initLength = 0.2f;
-	//float damping = 0.2f;
-	//float viscosity = 0.1f;
-	//addSpring(unsigned int ball1, unsigned  int ball2, float stiffness, float initLength, float dampingFactor)
   	addSpring(0, 1, stiffness, initLength, damping);
 }
 
@@ -207,10 +204,16 @@ void Dynamics::animate(float t)
 	////////////////////////////
 	// Collisions :
 	//
-//	for(unsigned int i=0; i<nbBalls; ++i ){
+	for(unsigned int i=0; i<nbBalls; ++i ){
 //		// avec le sol
-//		collisionBallPlane(positions[i], velocities[i], radiuses[i], invMasses[i], groundPosition, groundVelocity, groundNormal, 0.0f, 0.5f);
-//	}
+		collisionBallPlane(positions[i], velocities[i], radiuses[i], invMasses[i], groundPosition, groundVelocity, groundNormal, 0.0f, 0.5f);
+		//collisionBallBall(Vec& x1, Vec& v1, float r1, float invm1,Vec& x2, Vec& v2, float r2, float invm2,float rebound )
+		//collisionBallBall(x1,v1,r1,invm1,x2,v2,r2,invm2,rebound )
+		for(unsigned int j=i+1; j<nbBalls; ++j ){
+			//collisionBallBall(positions[i], velocities[i], radiuses[i], invMasses[i], groundPosition, groundVelocity, 0.1f, 0.0f, 0.5f);
+			collisionBallBall(positions[i], velocities[i], radiuses[i], invMasses[i], positions[j], velocities[j], radiuses[j], invMasses[j], 0.5f);
+		}
+	}
 
 }
 
@@ -252,7 +255,43 @@ void Dynamics::collisionBallBall(Vec& x1, Vec& v1, float r1, float invm1,
                                  Vec& x2, Vec& v2, float r2, float invm2,
                                  float rebound )
 {
-  Q_UNUSED(x1); Q_UNUSED(v1); Q_UNUSED(r1); Q_UNUSED(invm1);
-  Q_UNUSED(x2); Q_UNUSED(v2); Q_UNUSED(r2); Q_UNUSED(invm2);
-  Q_UNUSED(rebound);
+
+	// don't process fixed objects :
+	if( invm1==0 && invm2==0 ) 
+		return;
+
+	// Plane-ball distance :
+	//Vec gap = x1 - x2;
+	Vec gap = x2 -x1;
+	float distance=gap.x*gap.x+gap.y*gap.y+gap.z*gap.z;
+	distance=sqrt(distance);
+	if( distance > (r1+r2) ){ 
+		return;
+	}
+	//printf("colided!!\n");	
+
+	Vec normal=gap/distance;
+	float penetration=r1+r2-distance;//distance;
+	//float penetration=distance;
+	// Penetration velocity :
+	float vpen = (v1-v2)*normal;
+	
+	// Correction distribution (the heaviest object moves less) :
+	float corr1 = invm1 / (invm1+invm2);
+	float corr2 = invm2 / (invm1+invm2);
+	
+	// rebound :
+	corr1 *= (1+rebound);
+	corr2 *= (1+rebound);
+	
+	// position and velocity updates :
+	x1 = x1 - (corr1 * penetration) * normal;
+	v1 = v1 - (corr1 * vpen) * normal;
+	x2 = x2 + (corr2 * penetration) * normal;
+	v2 = v2 + (corr2 * vpen) * normal;		
+
+
+ // Q_UNUSED(x1); Q_UNUSED(v1); Q_UNUSED(r1); Q_UNUSED(invm1);
+ // Q_UNUSED(x2); Q_UNUSED(v2); Q_UNUSED(r2); Q_UNUSED(invm2);
+ // Q_UNUSED(rebound);
 }
