@@ -21,15 +21,39 @@ void Object::initFromDOMElement(const QDomElement& e) {
                 qglviewer::Quaternion o = frame_.orientation();
                 o.normalize();
                 frame_.setOrientation(o);
-            } else if (e.tagName() == "AxisAngleKeyFrame") {
+            } else if (e.tagName() == "KeyFrame") {
+                if (anglekeyframe_.size() == 0 && translationkeyframe_.size() == 0) {
+                    qglviewer::Frame tmpFrame = frame_;
+                    anglekeyframe_.push_back(KeyFrame(0.0, tmpFrame));
+                    translationkeyframe_.push_back(KeyFrame(0.0, tmpFrame));
+                }
+
                 qglviewer::Frame frame = frame_;
-                qglviewer::Vec axis;
-                axis.initFromDOMElement(e);
-                float angle = e.attribute("angle", "0.0").toFloat();
-                qglviewer::Quaternion animQuat;
-                animQuat.setAxisAngle(axis, angle);
-                frame.rotate(animQuat);
-                keyframe_.push_back(KeyFrame(e.attribute("time", "0.0").toFloat(), frame));
+                float t = e.attribute("time", "0.0").toFloat();
+                QDomNode contentNode = e.firstChild();
+                while (!contentNode.isNull()) {
+                    QDomElement nodeElement = contentNode.toElement();
+                    bool rotation = false;
+                    bool translation = false;
+                    if (nodeElement.tagName() == "RotationKeyFrame" && !rotation) {
+                        rotation = true;
+                        qglviewer::Vec axis;
+                        axis.initFromDOMElement(nodeElement);
+                        float angle = nodeElement.attribute("angle", "0.0").toFloat();
+                        qglviewer::Quaternion animQuat;
+                        animQuat.setAxisAngle(axis, angle);
+                        frame.rotate(animQuat);
+                        anglekeyframe_.push_back(KeyFrame(t, frame));
+                    } else if (nodeElement.tagName() == "TranslationKeyFrame" && !translation) {
+                        translation = true;
+                        qglviewer::Vec axis;
+                        axis.initFromDOMElement(nodeElement);
+                        frame.setTranslation(axis);
+                        translationkeyframe_.push_back(KeyFrame(t, frame));
+                    } else
+                        QMessageBox::warning(NULL, "Object XML error", "Error while parsing KeyFrames XML document");
+                    contentNode = contentNode.nextSibling();
+                }
             }
         } else
             QMessageBox::warning(NULL, "Object XML error", "Error while parsing Object XML document");
@@ -60,28 +84,92 @@ Frame Object::MultiplyFrame(const Frame& f1, const Frame& f2) const {
     return f;
 }
 
+/**
+ * Animate rotation and / or translation
+ **/
 void Object::animate(float time) {
 
-    list<KeyFrame>::const_iterator iter = keyframe_.begin();
+    Quaternion *q = new Quaternion;
+    Vec *v = new Vec;
+    bool qfind = animateAngle(time, q);
+    bool vfind = animateTranslation(time, v);
+
+    if (!qfind && !vfind) {
+        return;
+    }
+
+    if (qfind && vfind) {
+        frame_.setTranslationAndRotationWithConstraint(*v, *q);
+    } else if (qfind) {
+        frame_.setRotation(*q);
+    } else { //if (vfind)
+        frame_.setTranslationWithConstraint(*v);
+    }
+
+}
+
+/**
+ * Animate rotation
+ **/
+bool Object::animateAngle(float time, Quaternion *q) {
+    list<KeyFrame>::const_iterator iter = anglekeyframe_.begin();
     list<KeyFrame>::const_iterator iter_next = iter;
 
     Quaternion q1, q2;
     float t1, t2;
-    bool find = false;
-    for (iter_next++; !find && iter_next != keyframe_.end(); iter++, iter_next++) {
-        if (time >= (*iter).first && time < (*iter_next).first) {
+    bool found = false;
+    for (iter_next++; !found && iter_next != anglekeyframe_.end(); iter++, iter_next++) {
+        if ((*iter).first <= time && time < (*iter_next).first) {
+            found = true;
+
             t1 = (*iter).first;
-            q1 = (*iter).second.orientation();
+            q1 = (*iter).second.rotation();
+
             t2 = (*iter_next).first;
-            q2 = (*iter_next).second.orientation();
+            q2 = (*iter_next).second.rotation();
+
+        }
+    }
+    if (found) {
+        float t = (time - t1) / (t2 - t1);
+        (*q) = Quaternion::slerp(q1, q2, t, true);
+    }
+    return found;
+}
+
+/**
+ * Aimate translation
+ **/
+bool Object::animateTranslation(float time, Vec * v) {
+    list<KeyFrame>::const_iterator iter = translationkeyframe_.begin();
+    list<KeyFrame>::const_iterator iter_next = iter;
+
+    Vec v1, v2;
+    float t1, t2;
+    bool find = false;
+    for (iter_next++; !find && iter_next != translationkeyframe_.end(); iter++, iter_next++) {
+        if ((*iter).first <= time && time < (*iter_next).first) {
             find = true;
+
+            t1 = (*iter).first;
+            v1 = (*iter).second.translation();
+
+            t2 = (*iter_next).first;
+            v2 = (*iter_next).second.translation();
+
+            (*v).setValue((*iter).second.translation().x,
+                    (*iter).second.translation().y,
+                    (*iter).second.translation().z);
         }
     }
 
     if (find) {
         float t = (time - t1) / (t2 - t1);
-        Quaternion q = Quaternion::slerp(q1, q2, t, true);
-        frame_.setRotation(q);
-	//frame_.setTranslation(2,3,1);
+        if (t != 0) {
+            Vec nextTranslation = Vec((v2.x - v1.x) * t, (v2.y - v1.y) * t, (v2.z - v1.z) * t);
+            (*v) += nextTranslation;
+        }
     }
+    return find;
+
 }

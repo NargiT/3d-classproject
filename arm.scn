@@ -5,11 +5,20 @@
       <position x="0.0" y="0.0" z="0.0"/>
       <orientation q0="0" q1="0" q2="0" q3="1" />
     </Frame>
-    <AxisAngleKeyFrame x="0.0" y="0.0" z="0.0" angle = "0.0" time="0.0"/>
-    <AxisAngleKeyFrame x="1.4" y="1.4" z="1.4" angle = "0.5" time="25.0"/>
-    <AxisAngleKeyFrame x="0.0" y="0.0" z="0.0" angle = "0.0" time="50.0"/>
-    <AxisAngleKeyFrame x="1.4" y="1.4" z="1.4" angle = "0.5" time="75.0"/>
-
+    <KeyFrame time="10.0">
+        <RotationKeyFrame x="1.0" y="0.0" z="0.0" angle="0.2" />
+        <TranslationKeyFrame x="0.0" y="1.0" z="0.0" />
+    </KeyFrame>
+    <KeyFrame time="25.0">
+        <TranslationKeyFrame x="1.0" y="-0.5" z="0.0" />
+    </KeyFrame>
+    <KeyFrame time="50.0">
+        <RotationKeyFrame x="0.0" y="1.0" z="0.0" angle="1.5" />
+        <TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+    </KeyFrame>
+    <KeyFrame time="75.0">
+        <TranslationKeyFrame x="1.0" y="0.0" z="0.0" />
+    </KeyFrame>
     <Sphere radius="0.25">
       <Material>
         <DiffuseColor red="0.9" green="0.1" blue="0.1" />

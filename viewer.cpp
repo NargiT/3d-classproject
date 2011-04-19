@@ -68,8 +68,8 @@ void Viewer::init() {
     // Loads scene (prevents from pressing 'L' at each start).
     //loadScene("troisSpheres.scn");
     //loadScene("cylindres.scn");
-    //loadScene("arm.scn");
-    loadScene("dynamics.scn");
+    loadScene("arm.scn");
+    //loadScene("dynamics.scn");
 
     // Set Camera to scene Camera. Set scene center and radius.
     initFromScene();
@@ -129,45 +129,8 @@ void Viewer::keyPressEvent(QKeyEvent *e) {
                     scene()->camera().frame().setPosition(camera()->keyFrameInterpolator(1)->keyFrame(0).position());
                     scene()->camera().frame().setOrientation(camera()->keyFrameInterpolator(1)->keyFrame(0).orientation());
                 }
-                break;
             }
-        case Qt::Key_A:
-#if QT_VERSION < 0x040000
-            if ((e->state() == Qt::NoButton) || (e->state() == Qt::ShiftButton))
-#else
-            if ((e->modifiers() == Qt::NoModifier) || (e->modifiers() == Qt::ShiftModifier))
-#endif	
-            {
-#if QT_VERSION < 0x040000
-                if (e->state() == Qt::ShiftButton)
-#else
-                if (e->modifiers() == Qt::ShiftModifier)
-#endif
-                {
-                    // Shift+S renders image from current view point
-                    scene()->camera().frame().setPosition(camera()->position());
-                    scene()->camera().frame().setOrientation(camera()->orientation());
-                }
-
-                rayTracer().cleanImageList();
-                rayTracer().renderAnimation(0, 100);
-                // Remplacer cette ligne par : const QString name = "result.jpg";
-                // pour ne pas avoir � choisir un nom � chaque fois.
-                const QString name = QFileDialog::getSaveFileName();
-                rayTracer().saveAnimation(name);
-
-#if QT_VERSION < 0x040000
-                if ((e->state() == Qt::ShiftButton) && (camera()->keyFrameInterpolator(1)))
-#else
-                if ((e->modifiers() == Qt::ShiftModifier) && (camera()->keyFrameInterpolator(1)))
-#endif
-                {
-                    // Restore initial scene camera
-                    scene()->camera().frame().setPosition(camera()->keyFrameInterpolator(1)->keyFrame(0).position());
-                    scene()->camera().frame().setOrientation(camera()->keyFrameInterpolator(1)->keyFrame(0).orientation());
-                }
-                break;
-            }
+            break;
         default:
             QGLViewer::keyPressEvent(e);
     }
@@ -197,7 +160,7 @@ void Viewer::initFromScene() {
     camera()->setPosition(scene()->camera().frame().position());
     camera()->setOrientation(scene()->camera().frame().orientation());
     camera()->setFieldOfView(scene()->camera().fieldOfView());
-
+    
     // Remove previous keyFrames in path 1 (if any)
     if (camera()->keyFrameInterpolator(1))
         camera()->keyFrameInterpolator(1)->deletePath();
