@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene>
+	<Node>
+	<KeyFrame time="25">
+		<RotationKeyFrame x="0.0" y="0.0" z="1.0" angle="1.57079633" />
+	</KeyFrame>
+	<KeyFrame time="50">
+		<RotationKeyFrame x="0.0" y="0.0" z="1.0" angle="3.14159265" />
+	</KeyFrame>
+	<KeyFrame time="75">
+		<RotationKeyFrame x="0.0" y="0.0" z="1.0" angle="4.71238898" />
+	</KeyFrame>
+	<KeyFrame time="100">
+		<RotationKeyFrame x="0.0" y="0.0" z="1.0" angle="6.28318531" />
+	</KeyFrame>
+
+	<Sphere radius="0.25">
+			<Material>
+				<DiffuseColor red="1.0" green="1.0" blue="1.0" />
+				<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+				<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+			</Material>
+			<Frame>
+			  <position x="0.0" y="0.0" z="0.0"/>
+			  <orientation q0="0" q1="0" q2="0" q3="1" />
+			</Frame>
+	</Sphere>
+
+	<Sphere radius="0.10">
+		<Material>
+			<DiffuseColor red="0.9" green="0.1" blue="0.1" />
+			<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+			<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+		</Material>
+		<Frame>
+			<position x="0.0" y="1.0" z="0.0"/>
+			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>				
+		</Frame>
+		<KeyFrame time="25">
+			<TranslationKeyFrame x="0.0" y="-0.5" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="55">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="75">
+			<TranslationKeyFrame x="0.0" y="-0.5" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>	
+	</Sphere>
+
+	<Sphere radius="0.10">
+		<Material>
+			<DiffuseColor red="1.0" green="0.0" blue="1.0" />
+			<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+			<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+		</Material>
+		<Frame>
+			<position x="0.0" y="-1.0" z="0.0"/>
+			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>				
+		</Frame>
+		<KeyFrame time="25">
+			<TranslationKeyFrame x="0.0" y="0.5" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="55">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="75">
+			<TranslationKeyFrame x="0.0" y="0.5" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>	
+	</Sphere>
+
+	<Node>
+		<Frame>
+			<position x="0.0" y="0.0" z="0.0"/>
+			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>				
+		</Frame>	
+		<KeyFrame time="25">
+			<RotationKeyFrame x="0.0" y="1.0" z="0.0" angle="1.57079633" />
+		</KeyFrame>
+		<KeyFrame time="50">
+			<RotationKeyFrame x="0.0" y="1.0" z="0.0" angle="3.14159265" />
+		</KeyFrame>
+		<KeyFrame time="75">
+			<RotationKeyFrame x="0.0" y="1.0" z="0.0" angle="4.71238898" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<RotationKeyFrame x="0.0" y="1.0" z="0.0" angle="6.28318531" />
+		</KeyFrame>
+		
+	<Sphere radius="0.10">
+		<Material>
+			<DiffuseColor red="0.0" green="1.0" blue="1.0" />
+			<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+			<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+		</Material>
+		<Frame>
+			<position x="0.0" y="0.0" z="1.0"/>
+			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>				
+		</Frame>
+		<KeyFrame time="30">
+			<TranslationKeyFrame x="0.0" y="0.0" z="-0.5" />
+		</KeyFrame>
+		<KeyFrame time="45">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="65">
+			<TranslationKeyFrame x="0.0" y="0.0" z="-0.5" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>		
+	</Sphere>
+
+	<Sphere radius="0.10">
+		<Material>
+			<DiffuseColor red="0.1" green="0.9" blue="0.1" />
+			<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+			<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+		</Material>
+		<Frame>
+			<position x="0.0" y="0.0" z="-1.0"/>
+			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>				
+		</Frame>
+		<KeyFrame time="25">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.5" />
+		</KeyFrame>
+		<KeyFrame time="50">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="75">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.5" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>		
+	</Sphere>
+
+	<Sphere radius="0.10">
+		<Material>
+			<DiffuseColor red="1.0" green="1.0" blue="0.0" />
+			<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+			<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+		</Material>
+		<Frame>
+			<position x="-1.0" y="0.0" z="0.0"/>
+			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>				
+		</Frame>
+		<KeyFrame time="20">
+			<TranslationKeyFrame x="0.5" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="55">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="80">
+			<TranslationKeyFrame x="0.5" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+	</Sphere>
+
+	<Sphere radius="0.10">
+		<Material>
+			<DiffuseColor red="0.1" green="0.1" blue="0.9" />
+			<SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+			<ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+		</Material>
+		<Frame>
+		  <position x="1.0" y="0.0" z="0.0"/>
+		  <orientation q0="0" q1="0" q2="0" q3="1" />
+		</Frame>
+		<KeyFrame time="25">
+			<TranslationKeyFrame x="-0.5" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="50">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="75">
+			<TranslationKeyFrame x="-0.5" y="0.0" z="0.0" />
+		</KeyFrame>
+		<KeyFrame time="100">
+			<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+		</KeyFrame>
+	</Sphere>
+
+	</Node>
+		
+	</Node>
+  <Camera fieldOfView="0.7854" xResolution="400" yResolution="400">
+    <Frame>
+      <position x="3.26238" y="-3.63493" z="0.757532"/>
+      <orientation q0="-0.623147" q1="-0.270643" q2="-0.246995" q3="-0.690966"/>
+    </Frame>
+  </Camera>
+
+  <AmbientLight>
+    <Color red="0.2" green="0.2" blue="0.2" />
+  </AmbientLight>
+
+  <DirectionalLight>
+    <Direction x="0.3" y="0.5" z="-0.3" />
+    <Color red="0.8" green="0.8" blue="0.8" />
+  </DirectionalLight>
+
+  <PointLight>
+    <Position x="1.0" y="-0.7" z="0.45" />
+    <Color red="0.7" green="0.7" blue="0.7" />
+  </PointLight>
+</Scene>

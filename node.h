@@ -42,4 +42,5 @@ protected:
     // Needed for the bounding radius caching
     //
     mutable bool is_constant;
+
 };

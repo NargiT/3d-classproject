@@ -16,52 +16,46 @@ using namespace qglviewer;
 
 /* Constructor
  */
-Node::Node() : is_constant(false)
-{
+Node::Node() : is_constant(false) {
 }
 
 /* Destructor
  */
-Node::~Node()
-{
-	std::list<Object*>::const_iterator iter = _leaves.begin();
-	for(; iter != _leaves.end(); )
-	{
-		delete (*iter++);
-	}
+Node::~Node() {
+    std::list<Object*>::const_iterator iter = _leaves.begin();
+    for (; iter != _leaves.end();) {
+        delete (*iter++);
+    }
 }
 
 /* Add a node in the current tree
  */
-void Node::addObject(Object* node) 
-{
-	_leaves.push_back(node);
-	is_constant = false;
+void Node::addObject(Object* node) {
+    _leaves.push_back(node);
+    is_constant = false;
 }
 
 /* OpenGL display of the Node
  * We display all of the leaves of the current Node 
- */ 
-void Node::draw() const 
-{
-	// Apply the transform
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glMultMatrixd(frame_.matrix());
+ */
+void Node::draw() const {
 
-	// Display the leaves of this node
-	std::list<Object*>::const_iterator iter = _leaves.begin();
-	for(; iter != _leaves.end(); iter++)
-	{
-		(*iter)->draw();
-	}
-	
-	// Go back to the father's frame
-	glPopMatrix();
+    // Apply the transform
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glMultMatrixd(frame_.matrix());
+
+    // Display the leaves of this node
+    std::list<Object*>::const_iterator iter = _leaves.begin();
+    for (; iter != _leaves.end(); iter++) {
+        (*iter)->draw();
+    }
+
+    // Go back to the father's frame
+    glPopMatrix();
 }
 
-void Node::animate(float time)
-{
+void Node::animate(float time) {
     Object::animate(time);
 
     std::list<Object*>::const_iterator iter = _leaves.begin();
@@ -70,94 +64,77 @@ void Node::animate(float time)
     }
 }
 
-
 /* Radius of the scene node
  * We use radius caching to speed up things
  */
-float Node::boundingRadius() const 
-{
-	static float radius = 0.0f;
+float Node::boundingRadius() const {
+    static float radius = 0.0f;
 
-	if(!is_constant)
-	{
-		std::list<Object*>::const_iterator iter = _leaves.begin();
-		for(; iter != _leaves.end(); iter++)
-		{
-			radius = fmax(radius, (*iter)->boundingRadius() + (*iter)->frame().translation().norm());
-		}
-		is_constant = true;
-	}
+    if (!is_constant) {
+        std::list<Object*>::const_iterator iter = _leaves.begin();
+        for (; iter != _leaves.end(); iter++) {
+            radius = fmax(radius, (*iter)->boundingRadius() + (*iter)->frame().translation().norm());
+        }
+        is_constant = true;
+    }
 
-	return radius;
+    return radius;
 }
 
 /* Intersection between the ray and the list of all object in this
  * node 
  */
-bool Node::intersect(const Ray& ray, Hit& min_dist_hit, Frame frame) const 
-{
-	float dist = FLT_MAX;
-	bool is_intersecting = false;
-	frame = MultiplyFrame(frame, frame_);
+bool Node::intersect(const Ray& ray, Hit& min_dist_hit, Frame frame) const {
+    float dist = FLT_MAX;
+    bool is_intersecting = false;
+    frame = MultiplyFrame(frame, frame_);
 
-	Ray new_ray(frame_.coordinatesOf(ray.start()), frame_.transformOf(ray.direction()));
+    Ray new_ray(frame_.coordinatesOf(ray.start()), frame_.transformOf(ray.direction()));
 
-	std::list<Object*>::const_iterator iter = _leaves.begin();
-	for(; iter != _leaves.end(); iter++)
-	{
-		Hit hit;
-		is_intersecting = (*iter)->intersect(new_ray, hit, frame) || is_intersecting;
+    std::list<Object*>::const_iterator iter = _leaves.begin();
+    for (; iter != _leaves.end(); iter++) {
+        Hit hit;
+        is_intersecting = (*iter)->intersect(new_ray, hit, frame) || is_intersecting;
 
-		float current_dist = hit.time();
-		if(current_dist < dist)
-		{
-			dist = current_dist;
-			min_dist_hit = hit;
-		}
-	}
+        float current_dist = hit.time();
+        if (current_dist < dist) {
+            dist = current_dist;
+            min_dist_hit = hit;
+        }
+    }
 
-	return is_intersecting; 
+    return is_intersecting;
 }
 
 /* Load the Node from a XML
  */
-void Node::initFromDOMElement(const QDomElement& e)
-{
-	Object::initFromDOMElement(e);
+void Node::initFromDOMElement(const QDomElement& e) {
+    Object::initFromDOMElement(e);
 
-	QDomNode n = e.firstChild();
-	while (!n.isNull())
-	{      
-		QDomElement e = n.toElement();
-		if (!e.isNull())
-		{
-			if(e.tagName() == "Node")
-			{
-				Node* n = new Node();
-				n->initFromDOMElement(e);
-				addObject(n);
-			}
-			if (e.tagName() == "Sphere")
-			{
-				Sphere* s = new Sphere();
-				s->initFromDOMElement(e);
-				addObject(s);
-			}
-			else if (e.tagName() == "Dynamics")
-			{
-				Dynamics* d = new Dynamics();
-				d->initFromDOMElement(e);
-				addObject(d);
-			}else if(e.tagName() == "Cylinder")
-			{
-				Cylinder* c = new Cylinder();
-				c->initFromDOMElement(e);
-				addObject(c);
-			}
-			// TODO others nodes
-		}
-		else
-			QMessageBox::warning(NULL, "Object XML error", "Error while parsing Object XML document");
-		n = n.nextSibling();
-	}
+    QDomNode n = e.firstChild();
+    while (!n.isNull()) {
+        QDomElement e = n.toElement();
+        if (!e.isNull()) {
+            if (e.tagName() == "Node") {
+                Node* n = new Node();
+                n->initFromDOMElement(e);
+                addObject(n);
+            } else if (e.tagName() == "Sphere") {
+                Sphere* s = new Sphere();
+                s->initFromDOMElement(e);
+                addObject(s);
+            } else if (e.tagName() == "Dynamics") {
+                Dynamics* d = new Dynamics();
+                d->initFromDOMElement(e);
+                addObject(d);
+            } else if (e.tagName() == "Cylinder") {
+                Cylinder* c = new Cylinder();
+                c->initFromDOMElement(e);
+                addObject(c);
+            }
+            // TODO others nodes
+        } else
+            QMessageBox::warning(NULL, "Object XML error", "Error while parsing Object XML document");
+        n = n.nextSibling();
+    }
 }

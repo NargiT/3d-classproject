@@ -5,7 +5,7 @@
 #include "hit.h"
 #include "ray.h"
 #include "QGLViewer/quaternion.h"
-
+#include <string>
 
 #ifndef fmax
 #define fmax max
@@ -34,7 +34,7 @@ public:
         return material_;
     }
 
-    const qglviewer::Frame& frame() const {
+    qglviewer::Frame& frame() {
         return frame_;
     }
 
@@ -73,11 +73,16 @@ public:
     //
     qglviewer::Frame MultiplyFrame(const qglviewer::Frame& f1, const qglviewer::Frame& f2) const;
 
+    std::string& getName() {
+        return name_;
+    }
+
 protected:
     // Tous les objets ont un repere et un materiau.
     //
     qglviewer::Frame frame_;
     Material material_;
+    std::string name_;
 
 private:
     bool animateAngle(float time, qglviewer::Quaternion *q);

@@ -68,9 +68,9 @@ void Viewer::init() {
     // Loads scene (prevents from pressing 'L' at each start).
     //loadScene("troisSpheres.scn");
     //loadScene("cylindres.scn");
-    loadScene("arm.scn");
+    //loadScene("arm.scn");
     //loadScene("dynamics.scn");
-
+    //loadScene("frame.scn");
     // Set Camera to scene Camera. Set scene center and radius.
     initFromScene();
 
@@ -167,6 +167,7 @@ void Viewer::initFromScene() {
 
     // Add current (i.e. scene camera) position to F1.
     camera()->addKeyFrameToPath(1);
+    
 }
 
 void Viewer::select(const QPoint& point) {

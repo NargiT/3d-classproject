@@ -8,6 +8,7 @@ using namespace std;
 
 void Object::initFromDOMElement(const QDomElement& e) {
     QDomNode n = e.firstChild();
+    name_ = e.attribute("name", "NONE").toStdString();
     while (!n.isNull()) {
         QDomElement e = n.toElement();
         if (!e.isNull()) {
@@ -31,10 +32,10 @@ void Object::initFromDOMElement(const QDomElement& e) {
                 qglviewer::Frame frame = frame_;
                 float t = e.attribute("time", "0.0").toFloat();
                 QDomNode contentNode = e.firstChild();
+                bool rotation = false;
+                bool translation = false;
                 while (!contentNode.isNull()) {
                     QDomElement nodeElement = contentNode.toElement();
-                    bool rotation = false;
-                    bool translation = false;
                     if (nodeElement.tagName() == "RotationKeyFrame" && !rotation) {
                         rotation = true;
                         qglviewer::Vec axis;
@@ -48,7 +49,7 @@ void Object::initFromDOMElement(const QDomElement& e) {
                         translation = true;
                         qglviewer::Vec axis;
                         axis.initFromDOMElement(nodeElement);
-                        frame.setTranslation(axis);
+                        frame.translate(axis);
                         translationkeyframe_.push_back(KeyFrame(t, frame));
                     } else
                         QMessageBox::warning(NULL, "Object XML error", "Error while parsing KeyFrames XML document");
@@ -101,7 +102,7 @@ void Object::animate(float time) {
     if (qfind && vfind) {
         frame_.setTranslationAndRotationWithConstraint(*v, *q);
     } else if (qfind) {
-        frame_.setRotation(*q);
+        frame_.setRotationWithConstraint(*q);
     } else { //if (vfind)
         frame_.setTranslationWithConstraint(*v);
     }
@@ -171,5 +172,5 @@ bool Object::animateTranslation(float time, Vec * v) {
         }
     }
     return find;
-
 }
+
