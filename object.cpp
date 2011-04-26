@@ -8,7 +8,11 @@ using namespace std;
 
 void Object::initFromDOMElement(const QDomElement& e) {
     QDomNode n = e.firstChild();
+#if QT_VERSION < 0x040000
+    name_ = e.attribute("name", "NONE").ascii();
+#else
     name_ = e.attribute("name", "NONE").toStdString();
+#endif
     while (!n.isNull()) {
         QDomElement e = n.toElement();
         if (!e.isNull()) {
