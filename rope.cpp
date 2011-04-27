@@ -22,7 +22,7 @@ void Rope::draw() const
 
 	// draw spring elements
 	int nbSprings = getNbSprings();
-	glLineWidth(15);
+	glLineWidth(10);
 	glBegin(GL_LINES);
 	glColor3f(1.0, 0.0, 0.0);
 	for (int i=0 ; i<nbSprings ; i++){
@@ -53,6 +53,12 @@ void Rope::initFromDOMElement(const QDomElement& e)
 
 	// Parse for Ground position
 	groundPosition = Vec(e.attribute("pos_x", "0.0").toFloat(), e.attribute("pos_y", "0.0").toFloat(), e.attribute("pos_z", "-4.0").toFloat());
+
+	qDebug("Initial edge of the rope: p1(%f,%f,%f)\n",groundPosition.x,groundPosition.y,groundPosition.z);
+	
+	ropeAttachedPosition = Vec(e.attribute("att_x", "-10.0").toFloat(), e.attribute("att_y", "-10.0").toFloat(), e.attribute("att_z", "0.0").toFloat());
+
+	qDebug("Attached side of the rope: p2(%f,%f,%f)\n",ropeAttachedPosition.x,ropeAttachedPosition.y,ropeAttachedPosition.z);
 
 	// default material
 	Material mat;
@@ -98,14 +104,16 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	int nbOfAttachedSpheres=10;
 	
 	for(int x=0;x<nbOfAttachedSpheres;x++){
-	//	printf("adding sphere\n");
 		position  = position + Vec(0.0f, -0.5f*radius, 0.0f);
 		unsigned int ballid=addBall(position, Vec(0.0f, 1.0f, 0.0f), mass, radius);
   		if((x+1)<nbOfAttachedSpheres)
 			addSpring(x, x+1, stiffness, initLength, damping);
 	}
  
-  	//addSpring(0, 1, stiffness, initLength, damping);
+	unsigned int lastThreadArrachedID = addBall(ropeAttachedPosition, Vec(), 0.0, radius);
+	addSpring(nbOfAttachedSpheres-1, lastThreadArrachedID, stiffness, initLength, damping);
+	
+	//addSpring(0, 1, stiffness, initLength, damping);
 }
 
 /////////////////////////
@@ -261,7 +269,7 @@ void Rope::collisionBallBall(Vec& x1, Vec& v1, float r1, float invm1,
                                  Vec& x2, Vec& v2, float r2, float invm2,
                                  float rebound )
 {
-
+/*
 	// don't process fixed objects :
 	if( invm1==0 && invm2==0 ) 
 		return;
@@ -296,7 +304,7 @@ void Rope::collisionBallBall(Vec& x1, Vec& v1, float r1, float invm1,
 	x2 = x2 + (corr2 * penetration) * normal;
 	v2 = v2 + (corr2 * vpen) * normal;		
 
-
+*/
  // Q_UNUSED(x1); Q_UNUSED(v1); Q_UNUSED(r1); Q_UNUSED(invm1);
  // Q_UNUSED(x2); Q_UNUSED(v2); Q_UNUSED(r2); Q_UNUSED(invm2);
  // Q_UNUSED(rebound);
