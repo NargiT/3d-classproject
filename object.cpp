@@ -56,16 +56,7 @@ void Object::initFromDOMElement(const QDomElement& e) {
                         frame.translate(axis);
                         translationkeyframe_.push_back(KeyFrame(t, frame));
                     } 
-			//Rotation keyframe
-		    else if (e.tagName() == "AxisAngleKeyFrame")
-			{
-			qglviewer :: Frame frame=frame_;
-			qglviewer :: Vec axis; axis.initFromDOMElement(e);
-			float angle=e.attribute("angle","0.0" ).toFloat();
-			qglviewer::Quaternion animQuat; animQuat.setAxisAngle(axis,angle) ;
-			frame.rotate(animQuat);
-			keyframe_.push_back( KeyFrame(e.attribute("time","0.0").toFloat(),frame ) ) ;
-			}
+	
  
 			else
                         QMessageBox::warning(NULL, "Object XML error", "Error while parsing KeyFrames XML document");
