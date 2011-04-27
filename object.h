@@ -25,6 +25,9 @@ public:
     //key frame smart array
     std::list<KeyFrame> anglekeyframe_;
     std::list<KeyFrame> translationkeyframe_;
+    
+    //key frame smart array
+    std::list<KeyFrame> keyframe_ ;
 
 
     // Accesseurs
