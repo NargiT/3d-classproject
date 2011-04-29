@@ -8,12 +8,16 @@
 #include "ray.h"
 #include "hit.h"
 #include "light.h"
+#include "fog.h"
 
 #include <vector>
 
 class Scene
 {
 	public :
+    // Fog (scattering)
+    Fog* fog;
+
 		Scene() ;
 		~Scene() ;
 		void draw() const;

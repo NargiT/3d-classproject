@@ -2,6 +2,7 @@
 #include "scene.h"
 #include "sphere.h"
 #include "cylinder.h"
+#include <fog.h>
 
 #include <iostream>
 #include <qfile.h>
@@ -13,7 +14,8 @@ using namespace std;
 /* Need to create the scene Node
  */
 Scene::Scene() {
-    _top_node = new Node();
+  fog = new Fog();
+  _top_node = new Node();
 }
 
 /* Clean up memory by deleting the top node
@@ -91,6 +93,8 @@ void Scene::loadFromFile(const QString& filename) {
                 PointLight *li = new PointLight;
                 li->initFromDOMElement(e);
                 addLight(li);
+            } else if (e.tagName() == "Fog") {
+              fog->initFromDOMElement(e);
             } else {
                 cout << "TODO element : \n"; // << qPrintable(e.tagName()) << endl;
             }

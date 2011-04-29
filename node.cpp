@@ -3,6 +3,7 @@
 #include "sphere.h"
 #include "cylinder.h"
 #include "dynamics.h"
+#include "plane.h"
 
 #include <float.h>
 #include <qmessagebox.h>
@@ -123,6 +124,10 @@ void Node::initFromDOMElement(const QDomElement& e) {
                 Sphere* s = new Sphere();
                 s->initFromDOMElement(e);
                 addObject(s);
+            } else if (e.tagName() == "Plane") {
+              Plane* p = new Plane();
+              p->initFromDOMElement(e);
+              addObject(p);
             } else if (e.tagName() == "Dynamics") {
                 Dynamics* d = new Dynamics();
                 d->initFromDOMElement(e);

@@ -2,6 +2,7 @@
 #include "scene.h"
 #include "material.h"
 #include "color.h"
+#include "fog.h"
 
 #include <qfiledialog.h>
 #if QT_VERSION >= 0x040000
@@ -131,6 +132,9 @@ void Viewer::keyPressEvent(QKeyEvent *e) {
                 }
             }
             break;
+        case Qt::Key_T:
+        //scene_->fog->switchFog();   // I cannot figure out how to run it :/
+          break;
         default:
             QGLViewer::keyPressEvent(e);
     }
