@@ -15,7 +15,6 @@ using namespace std;
 * Constructor
 */
 Fog::Fog()  {
-  qDebug() << "Fog created";
   string str("exp2");
   Color fogColor(0.3f, 0.8f, 0.98f);
   init(str, fogColor, 0.04f, 10.0f );
@@ -59,7 +58,6 @@ void Fog::init(const string& type, Color fogColor, float val1, float val2)   {
 * Init form DOM element
 */
 void Fog::initFromDOMElement(const QDomElement& e) {
-  qDebug() << "Init FOG from element";
   float val1, val2;
   string str;
 

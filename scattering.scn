@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene>
+  <Node name="MainNode">
+    <Frame>
+      <position x="0.0" y="0.0" z="0.0"/>
+      <orientation q0="0" q1="0" q2="0" q3="1" />
+    </Frame>
+    <KeyFrame time="10.0">
+        <TranslationKeyFrame x="0.0" y="1.0" z="0.0" />
+    </KeyFrame>
+    <KeyFrame time="25.0">
+        <TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+    </KeyFrame>
+    <KeyFrame time="50.0">
+        <TranslationKeyFrame x="0.0" y="1.0" z="0.0" />
+    </KeyFrame>
+    <KeyFrame time="75.0">
+        <TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+    </KeyFrame>
+	
+		<Plane size="40" smallSize="4" name="Bottom">
+      <Material>
+        <DiffuseColor red="0.9" green="0.1" blue="0.1" />
+        <SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+        <ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+      </Material>
+      <Frame>
+        <position x="-20.0" y="-20.0" z="0.0"/>
+        <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>
+      </Frame>
+		</Plane>
+	
+		<Cylinder radius="2.0" height="5" name="monolit">
+      <Material>
+        <DiffuseColor red="1.0" green="1.0" blue="0.0"/>
+        <ReflectiveColor red="0.2" green="0.2" blue="0.2"/>
+        <SpecularColor red="0.5" green="0.5" blue="0.5" exponent="16"/>
+      </Material>
+      <Frame>
+        <position x="-5.0" y="-3.0" z="-1.0"/>
+        <orientation q0="0.17" q1="0.0" q2="0." q3="1.0"/>
+      </Frame>	  
+    </Cylinder>
+	
+    <Sphere radius="0.25" name="Sphere1">
+      <Material>
+        <DiffuseColor red="0.9" green="0.1" blue="0.1" />
+        <SpecularColor red="0.8" green="0.6" blue="0.6" exponent="2" />
+        <ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+      </Material>
+      <Frame>
+        <position x="0.0" y="0.0" z="0.0"/>
+        <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>
+      </Frame>
+	</Sphere>
+
+    <Cylinder radius="0.25" height="1.0" name="Cylinder1">
+      <Material>
+        <DiffuseColor red="0.8" green="0.2" blue="0.2"/>
+        <ReflectiveColor red="0.2" green="0.2" blue="0.2"/>
+        <SpecularColor red="0.5" green="0.5" blue="0.5" exponent="16"/>
+      </Material>
+      <Frame>
+        <position x="0.0" y="0.0" z="0.25"/>
+        <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>
+      </Frame>	  
+    </Cylinder>
+    <Node name="InsideNode">
+      <Frame>
+        <position x="0.0" y="0.0" z="1.4"/>
+        <orientation q0="0.5" q1="0" q2="0" q3="0.866" />
+      </Frame>
+      <KeyFrame time="25.0">
+		<TranslationKeyFrame x="0.0" y="0.0" z="1.0" />
+	  </KeyFrame>
+	  <KeyFrame time="75.0">
+		<TranslationKeyFrame x="0.0" y="0.0" z="0.0" />
+	  </KeyFrame>
+
+      <Sphere radius="0.25" name="Sphere2">
+        <Material>
+          <DiffuseColor red="0.0" green="0.9" blue="0.1" />
+          <SpecularColor red="0.9" green="0.6" blue="0.6" exponent="2" />
+          <ReflectiveColor red="0.4" green="0.2" blue="0.2" />
+        </Material>
+        <Frame>
+          <position x="0.0" y="0.0" z="0.0" />
+          <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0" />
+        </Frame>
+      </Sphere>
+
+      <Cylinder bottomRadius="0.25" topRadius="0.01" height="1.5" name="Cylinder2">
+        <Material>
+          <DiffuseColor red="0.0" green="0.8" blue="0.2"/>
+          <ReflectiveColor red="0.2" green="0.2" blue="0.2"/>
+          <SpecularColor red="0.5" green="0.5" blue="0.5" exponent="16"/>
+        </Material>
+        <Frame>
+          <position x="0.0" y="0.0" z="0.25"/>
+          <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0"/>
+        </Frame>
+      </Cylinder>
+    </Node>
+  </Node>
+
+  <Fog type="exp2" val1="0.04">
+  	<Color red="0.3" green="0.8" blue="0.98"/>
+  </Fog>
+
+  <Camera fieldOfView="0.7854" xResolution="400" yResolution="400">
+    <Frame>
+      <position x="3.26238" y="-3.63493" z="1.557532"/>
+      <orientation q0="-0.623147" q1="-0.270643" q2="-0.246995" q3="-0.690966"/>
+    </Frame>
+  </Camera>
+
+
+  <AmbientLight>
+    <Color red="0.2" green="0.2" blue="0.2" />
+  </AmbientLight>
+
+  <DirectionalLight>
+    <Direction x="0.3" y="0.5" z="-0.3" />
+    <Color red="0.8" green="0.8" blue="0.8" />
+  </DirectionalLight>
+
+  <PointLight>
+    <Position x="1.0" y="-0.7" z="0.45" />
+    <Color red="0.7" green="0.7" blue="0.7" />
+  </PointLight>
+
+</Scene>
