@@ -147,12 +147,16 @@ void Node::initFromDOMElement(const QDomElement& e) {
                 f->initFromDOMElement(e);
                 addObject(f);
             } else if (e.tagName() == "Rope") {
-                 Rope* d = new Rope();
- 		 d->frame().setReferenceFrame(&frame_);
-                 d->initFromDOMElement(e);
-                 addObject(d);
+                Rope* d = new Rope();
+                d->frame().setReferenceFrame(&frame_);
+                d->initFromDOMElement(e);
+                addObject(d);
+            } else if (e.tagName() == "Airbubbles") {
+                Airbubbles* a = new Airbubbles();
+                a->frame().setReferenceFrame(&frame_);
+                a->initFromDOMElement(e);
+                addObject(a);
             }
-
 
 
             // TODO others nodes
