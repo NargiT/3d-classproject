@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene>
   <Node>
-    <Rope dt="0.01" pos_x="13.0" att_x="-10.0" att_y="-2.0" att_z="0.0">
+    <Rope dt="0.01" pos_x="0.0" pos_y="0.0" pos_z="1.0"
+		    att_x="1.0" att_y="-1.0" att_z="1.0">
       <Frame>
 	<position x="0.1" y="0.4" z="0.3" />
 	<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0" />
