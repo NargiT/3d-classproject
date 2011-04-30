@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene>
+    <!--Top Face-->
+	<PlanTexture  
+	 index="1"
+  	 filepathname="img/turtle.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="1.0"
+   	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="1.0"
+   	 topright_x="1.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-1.0" topleft_y="1.0" topleft_z="1.0">
+    </PlanTexture> 
+	<!--Bottom Face-->
+    <PlanTexture
+     index="2"
+  	 filepathname="img/turtle.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
+   	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="-1.0"
+   	 topright_x="1.0" topright_y="1.0" topright_z="-1.0"
+   	 topleft_x="-1.0" topleft_y="1.0" topleft_z="-1.0">
+    </PlanTexture>
+    <!--Back Face--> 
+    <PlanTexture
+     index="3"
+  	 filepathname="img/turtle.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="1.0" bottomleft_z="-1.0"
+   	 bottomright_x="1.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="1.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-1.0" topleft_y="1.0" topleft_z="1.0">
+	</PlanTexture>  
+	<!--Right face-->
+	<PlanTexture
+	 index="5"
+  	 filepathname="img/turtle.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
+   	 bottomright_x="-1.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="-1.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-1.0" topleft_y="-1.0" topleft_z="1.0">
+	</PlanTexture> 
+	<!--Left Face-->
+	<PlanTexture
+	 index="6"
+  	 filepathname="img/turtle.bmp" 
+  	 bottomleft_x="1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
+   	 bottomright_x="1.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="1.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="1.0" topleft_y="-1.0" topleft_z="1.0">
+	</PlanTexture> 
+	
+  <Camera fieldOfView="1.1854" xResolution="400" yResolution="400">
+    <Frame>
+      <position x="0.0861307" y="-1.53733" z="0.0519539" />
+      <orientation q0="-0.646249" q1="-0.0164935" q2="-0.0134328" q3="-0.76283" />
+    </Frame>
+  </Camera>
+  
+  <AmbientLight>
+    <Color red="0.2" green="0.2" blue="0.2" />
+  </AmbientLight>
+  
+  <DirectionalLight>
+    <Direction x="0.3" y="0.5" z="-0.3" />
+    <Color red="0.8" green="0.8" blue="0.8" />
+  </DirectionalLight>
+
+  <PointLight>
+    <Position x="1.0" y="-0.7" z="0.45" />
+    <Color red="0.7" green="0.7" blue="0.7" />
+  </PointLight>
+
+</Scene>
