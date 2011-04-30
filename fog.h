@@ -4,7 +4,6 @@
 #include "object.h"
 
 #include <qdom.h>
-#include <QMap>
 
 using namespace std;
 
