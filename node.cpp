@@ -4,6 +4,7 @@
 #include "dynamics.h"
 #include "planTexture.h"
 #include "plane.h"
+#include "rope.h"
 #include "fishflock.h"
 
 #include <float.h>
@@ -145,7 +146,15 @@ void Node::initFromDOMElement(const QDomElement& e) {
                 FishFlock* f = new FishFlock();
                 f->initFromDOMElement(e);
                 addObject(f);
+            } else if (e.tagName() == "Rope") {
+                 Rope* d = new Rope();
+ 		 d->frame().setReferenceFrame(&frame_);
+                 d->initFromDOMElement(e);
+                 addObject(d);
             }
+
+
+
             // TODO others nodes
         } else
             QMessageBox::warning(NULL, "Object XML error", "Error while parsing Object XML document");
