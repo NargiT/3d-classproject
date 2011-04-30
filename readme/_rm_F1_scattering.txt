@@ -1,0 +1,35 @@
+------------------------
+    fog.cpp | fog.h
+------------------------
+-> Martin Matuszek (if you have any comments) 
+
+It's like underwatter fog. It's behavior is changing pixel color into desired fog-color depending on distance from camera
+
+In your scene file, add this directly into scene:
+
+  <Fog type="exp2" val1="0.04">
+  	<Color red="0.3" green="0.8" blue="0.98"/>
+  </Fog>
+  
+  OR
+  
+  <Fog type="linear" val1="10.0" val2="20.0">
+  	<Color red="0.3" green="0.8" blue="0.98"/>
+  </Fog>
+  
+  
+  * type - 3 possibilities "linear" "exp" "exp2"
+         - it is changing how your scattering/fog will behave (you can experiment)
+         
+  * val1 - 1. for "exp" and "exp2" function, density parameter, which is changing shape of function
+           2. for "linear", it is bottom treshold -> from which distance is fog starting to appear
+           
+  * val2 - only for "linear", it sets upper distance from camera, when everything is completely foggy
+  
+  * Color - color of your fog
+          - it also changes color of background of your window
+  
+  ==>> Experiment with color and functions and parameters, to get the ,most suitable result for you
+  ==>> Enable/Disable fog by pressing 'T' Key (scaTering) and moving the scene
+           
+
