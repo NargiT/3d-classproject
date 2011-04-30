@@ -6,6 +6,7 @@
 #include "plane.h"
 #include "rope.h"
 #include "fishflock.h"
+#include "airbubbles.h"
 
 #include <float.h>
 #include <qmessagebox.h>
