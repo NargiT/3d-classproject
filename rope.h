@@ -80,6 +80,7 @@ class Rope : public Node
 
 		// ground
 		qglviewer::Vec ropeAttachedPosition;
+		qglviewer::Vec worldRef;
 		qglviewer::Vec groundPosition;
 		qglviewer::Vec groundVelocity;
 		qglviewer::Vec groundNormal;

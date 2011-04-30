@@ -58,6 +58,9 @@ void Rope::initFromDOMElement(const QDomElement& e)
 
 	qDebug("Attached side of the rope: p2(%f,%f,%f)\n",ropeAttachedPosition.x,ropeAttachedPosition.y,ropeAttachedPosition.z);
 
+	//Saving world reference
+	worldRef=frame().inverseCoordinatesOf(ropeAttachedPosition);
+
 	// default material
 	Material mat;
 	mat.setDiffuseColor(Color(0.9,0.1,0.1));
@@ -202,9 +205,9 @@ void Rope::animate(float t)
 			positions[i] = positions[i] + dt * velocities[i];
 
 			// update corresponding drawing sphere positions
-			Frame f;
-			f.setPosition(positions[i]);
-			drawing_sphere[i]->setFrame(f);
+			//Frame f;
+			//f.setPosition(positions[i]);
+			//drawing_sphere[i]->setFrame(f);
 	}
 
 	////////////////////////////
@@ -216,6 +219,14 @@ void Rope::animate(float t)
 			collisionBallBall(positions[i], velocities[i], radiuses[i], invMasses[i], positions[j], velocities[j], radiuses[j], invMasses[j], 0.5f);
 		}
 	}
+
+	//cout << "Attachment:" << ropeAttachedPosition << endl;
+	//cout << "World ref:" << worldRef << endl;
+	//cout << "Inverse of the world:" << frame().inverseCoordinatesOf(ropeAttachedPosition) << endl;
+	//cout << "Coordinates of:" << frame().coordinatesOf(ropeAttachedPosition) << endl;
+	//cout << endl;
+
+	positions[0] = worldRef - frame().inverseCoordinatesOf(ropeAttachedPosition);
 
 }
 
