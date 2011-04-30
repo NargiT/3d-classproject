@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene>
-	<!--Draw a cube without front-face, to simulate the sea (the deep-sea diver and animations should be inside this cube)-->
-	<!--each face of the cube should be put inside a tag PlanTexture-->
+	<!--Draw a cube without front-face, to simulate the sea (the deep-sea diver and animations should be inside this cube in the scene)-->
+	<!--each face of the cube should be put inside a tag PlanTexture. Don't put inside the tags Node-->
 	<!--the filename is the texture you want in your scene(LIMITATION: it is not working different images in each face)-->
 	<!--the order of the vertices should be like in the example (first bottomleft, after bottomright, etc)-->
 	<!--the tag Camera in the end of the file should be configured too(position and orientation). In this example, the camera is configured properly-->	
@@ -47,6 +47,21 @@
    	 topleft_x="1.0" topleft_y="-1.0" topleft_z="1.0">
 	</PlanTexture> 
 
+	
+  <Node>
+	<Sphere radius="0.1">
+  	  <Material>
+        <DiffuseColor red="0.1" green="0.1" blue="0.9" />
+        <SpecularColor red="0.6" green="0.6" blue="0.8" exponent="16" />
+        <ReflectiveColor red="0.4" green="0.4" blue="0.8" />
+      </Material>
+      <Frame>
+        <position x="0.0" y="0.0" z="0.0" />
+        <orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0" />
+      </Frame>
+    </Sphere>
+  </Node>
+
   <Camera fieldOfView="1.1854" xResolution="400" yResolution="400">
     <Frame>
       <position x="0.0242419" y="-1.62182" z="-0.254824" />
@@ -55,16 +70,17 @@
   </Camera>
   
   <AmbientLight>
-    <Color red="0.2" green="0.2" blue="0.2" />
+    <Color red="0.1" green="0.1" blue="0.1" />
   </AmbientLight>
   
   <DirectionalLight>
-    <Direction x="0.3" y="0.5" z="-0.3" />
-    <Color red="0.8" green="0.8" blue="0.8" />
+    <Direction x="0.0" y="1.0" z="0.0" />
+    <Position x="0.0" y="0.0" z="0.0" />
+    <Color red="0.1" green="0.1" blue="0.1" />
   </DirectionalLight>
 
   <PointLight>
-    <Position x="1.0" y="-0.7" z="0.45" />
+    <Position x="0.0" y="0.0" z="0.0" />
     <Color red="0.7" green="0.7" blue="0.7" />
   </PointLight>
 

@@ -139,6 +139,8 @@ void PlanTexture::draw() const {
 }
 
 void PlanTexture::drawPlan() const{
+	glColor3f(1.0,1.0,1.0);
+	
 	glEnable(GL_TEXTURE_2D);					// Enable Texture Mapping	
 
 	glBindTexture(GL_TEXTURE_2D, texture[0]);	// Select Our Texture. 
@@ -147,18 +149,20 @@ void PlanTexture::drawPlan() const{
 		int i=0;
 		glTexCoord2f(0.0f, 0.0f); 
 		glVertex3f(positions[i].x, positions[i].y,  positions[i].z);	// Bottom Left Of The Texture and Quad
+		glNormal3f(0.0, -1.0,  0.0);	
 		i++;
 		glTexCoord2f(1.0f, 0.0f); 
 		glVertex3f(positions[i].x, positions[i].y,  positions[i].z);	// Bottom Right Of The Texture and Quad
+		glNormal3f(0.0, -1.0,  0.0);	
 		i++;
 		glTexCoord2f(1.0f, 1.0f);
 		glVertex3f(positions[i].x, positions[i].y,  positions[i].z);	// Top Right Of The Texture and Quad
+		glNormal3f(0.0, -1.0,  0.0);	
 		i++;
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(positions[i].x, positions[i].y,  positions[i].z);	// Top Left Of The Texture and Quad
-	glEnd();	
-
-	glDisable(GL_TEXTURE_2D);			
+		glNormal3f(0.0, -1.0,  0.0);	
+	glEnd();			
 }
 
 // Load Bitmaps And Convert To Textures
