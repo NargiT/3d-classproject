@@ -63,7 +63,7 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	mat.setDiffuseColor(Color(0.9,0.1,0.1));
 	setMaterial(mat);
 
-	Vec initPos (0.0, 0.0, 0.0);
+	Vec initPos = groundPosition; //(0.0, 0.0, 0.0);
 	float mass = 0.30f;
 	float radius = 0.01f;
 	
