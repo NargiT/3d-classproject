@@ -1,5 +1,5 @@
 #include "material.h"
-#include <stdlib.h>
+#include <cstdio>
 #include <qmessagebox.h>
 
 Material::Material()
@@ -43,7 +43,7 @@ void Material::initFromDOMElement(const QDomElement& e)
 		      setTextureScaleU(e.attribute("scaleU", "1.0").toFloat());
 		    if (e.hasAttribute("scaleV"))
 		      setTextureScaleV(e.attribute("scaleV", "1.0").toFloat());
-		    const char *filename =e.attribute("file"); 
+		    const char *filename = e.attribute("file"); 
 		    loadTextureFromFile((char *)filename);
 		    if (e.attribute("mode") == "MODULATE") setTextureMode(MODULATE);
 		    if (e.attribute("mode") == "BLEND")    setTextureMode(BLEND);
