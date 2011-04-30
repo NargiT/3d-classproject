@@ -53,8 +53,10 @@ private:
     // Init elements after DOM callback
     void init(float radius, int ntheta, int nphi);
 
-   std::vector<qglviewer::Vec> positions;
+    std::vector<qglviewer::Vec> positions;
 
     // Radius of the sphere
     float radius_;
+
+    GLuint texture;
 };

@@ -10,8 +10,6 @@
 using namespace qglviewer;
 using namespace std;
 
-GLuint texture[0];
-
 PlanTexture::PlanTexture() {
     setRadius(1.0f);
 }
@@ -143,7 +141,7 @@ void PlanTexture::drawPlan() const{
 	
 	glEnable(GL_TEXTURE_2D);					// Enable Texture Mapping	
 
-	glBindTexture(GL_TEXTURE_2D, texture[0]);	// Select Our Texture. 
+	glBindTexture(GL_TEXTURE_2D, texture);	// Select Our Texture. 
 	
     glBegin(GL_QUADS);
 		int i=0;
@@ -177,14 +175,16 @@ void PlanTexture::LoadGLTextures(char *filename) const{
     }           
   
     // Create Textures	
-    glGenTextures(1, &texture[0]);
+ 	GLuint text=texture;
+  
+    glGenTextures(1, &text);
 
 	//printf("\nfilename: %s\n",filename);
     if (!ImageLoad(filename,image1)) 
 		exit(1);         
 
     // nearest filtered texture
-    glBindTexture(GL_TEXTURE_2D, texture[0]);   // 2d texture (x and y size)
+    glBindTexture(GL_TEXTURE_2D, texture);   // 2d texture (x and y size)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST); // scale cheaply when image bigger than texture
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST); // scale cheaply when image smalled than texture
     glTexImage2D(GL_TEXTURE_2D, 0, 3, image1->sizeX, image1->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, image1->data);
@@ -196,6 +196,7 @@ void PlanTexture::LoadGLTextures(char *filename) const{
 void PlanTexture::initFromDOMElement(const QDomElement& e) {
     Object::initFromDOMElement(e);
 
+	texture= e.attribute("index", "1").toInt();
 	const char *filename_const;
 	filename_const = e.attribute("filepathname", "");
 	LoadGLTextures((char*) filename_const);		// Jump To Texture Loading Routine 	

@@ -1,37 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene>
 	<!--Draw a cube without front-face, to simulate the sea (the deep-sea diver and animations should be inside this cube in the scene)-->
-	<!--each face of the cube should be put inside a tag PlanTexture. Don't put inside the tags Node-->
-	<!--the filename is the texture you want in your scene(LIMITATION: it is not working different images in each face)-->
+	<!--each face of the cube should be put inside a tag PlanTexture. Don't put inside the tag Node-->
+	<!--the filename is the texture you want in that face in your scene (should be bmp, 24 bits)-->
+	<!--index is incremental. Is the number of that face-->
 	<!--the order of the vertices should be like in the example (first bottomleft, after bottomright, etc)-->
 	<!--the tag Camera in the end of the file should be configured too(position and orientation). In this example, the camera is configured properly-->	
 	
-    <!--Top Face-->
-	<PlanTexture  
-  	 filepathname="img/turtle.bmp" 
-  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="1.0"
-   	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="1.0"
-   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
-   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="1.0">
-    </PlanTexture> 
-	<!--Bottom Face-->
-    <PlanTexture
-  	 filepathname="img/turtle.bmp" 
-  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
-   	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="-1.0"
-   	 topright_x="2.0" topright_y="1.0" topright_z="-1.0"
-   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="-1.0">
-    </PlanTexture>
-    <!--Back Face--> 
-    <PlanTexture
-  	 filepathname="img/turtle.bmp" 
-  	 bottomleft_x="-2.0" bottomleft_y="1.0" bottomleft_z="-1.0"
-   	 bottomright_x="2.0" bottomright_y="1.0" bottomright_z="-1.0"
-   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
-   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="1.0">
-	</PlanTexture>  
+
 	<!--Left Face-->
 	<PlanTexture
+	 index="1"
   	 filepathname="img/turtle.bmp" 
   	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
    	 bottomright_x="-2.0" bottomright_y="1.0" bottomright_z="-1.0"
@@ -40,13 +19,40 @@
 	</PlanTexture> 
 	<!--Right face-->
 	<PlanTexture
-  	 filepathname="img/turtle.bmp" 
+	 index="2"
+  	 filepathname="img/turtle2.bmp" 
   	 bottomleft_x="1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
    	 bottomright_x="2.0" bottomright_y="1.0" bottomright_z="-1.0"
    	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
    	 topleft_x="1.0" topleft_y="-1.0" topleft_z="1.0">
 	</PlanTexture> 
-
+    <!--Top Face-->
+	<PlanTexture  
+     index="3"
+  	 filepathname="img/benthic_zone_1.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="1.0"
+   	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="1.0"
+   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="1.0">
+    </PlanTexture> 
+	<!--Bottom Face-->
+    <PlanTexture
+     index="4"
+  	 filepathname="img/mud.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
+   	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="-1.0"
+   	 topright_x="2.0" topright_y="1.0" topright_z="-1.0"
+   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="-1.0">
+    </PlanTexture>
+    <!--Back Face--> 
+    <PlanTexture
+     index="5"
+  	 filepathname="img/seabedTexture.bmp" 
+  	 bottomleft_x="-2.0" bottomleft_y="1.0" bottomleft_z="-1.0"
+   	 bottomright_x="2.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="1.0">
+	</PlanTexture>  
 	
   <Node>
 	<Sphere radius="0.1">
