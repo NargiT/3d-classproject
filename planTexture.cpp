@@ -1,6 +1,6 @@
 #include "planTexture.h"
 #include "material.h"
-
+#include <cstdio>
 #include <GL/glut.h>
 #include <cmath>
 #include <float.h>
@@ -67,7 +67,7 @@ int PlanTexture::ImageLoad(char *filename,Image *image) const{
 		printf("Error reading width from %s.\n", filename);
 		return 0;
     }
-    
+
     // read the height 
     if ((i = fread(&image->sizeY, 4, 1, file)) != 1) {
 		printf("Error reading height from %s.\n", filename);
@@ -76,7 +76,6 @@ int PlanTexture::ImageLoad(char *filename,Image *image) const{
     
     // calculate the size (assuming 24 bits or 3 bytes per pixel).
     size = image->sizeX * image->sizeY * 3;
-
     // read the planes
     if ((fread(&planes, 2, 1, file)) != 1) {
 		printf("Error reading planes from %s.\n", filename);
@@ -100,10 +99,11 @@ int PlanTexture::ImageLoad(char *filename,Image *image) const{
     // seek past the rest of the bitmap header.
     fseek(file, 24, SEEK_CUR);
 
-    // read the data. 
+    // read the data.
     image->data = (char *) malloc(size);
+
     if (image->data == NULL) {
-		printf("Error allocating memory for color-corrected image data");
+		printf("Error allocating memory for color-corrected image data\n");
 		return 0;	
     }
 
@@ -198,9 +198,14 @@ void PlanTexture::initFromDOMElement(const QDomElement& e) {
 
 	texture= e.attribute("index", "1").toInt();
 	const char *filename_const;
-	filename_const = e.attribute("filepathname", "");
-	LoadGLTextures((char*) filename_const);		// Jump To Texture Loading Routine 	
-	float bottomleft_x  = e.attribute("bottomleft_x", "0.0").toFloat();
+	//filename_const = e.attribute("filepathname", "");
+#if QT_VERSION < 0x040000
+	filename_const = e.attribute("filepathname", "").ascii();
+#else
+        filename_const = e.attribute("filepathname", "").toLatin1();
+#endif
+        LoadGLTextures((char*) filename_const);		// Jump To Texture Loading Routine
+        float bottomleft_x  = e.attribute("bottomleft_x", "0.0").toFloat();
 	float bottomleft_y  = e.attribute("bottomleft_y", "0.0").toFloat();
 	float bottomleft_z  = e.attribute("bottomleft_z", "0.0").toFloat();
 	float bottomright_x = e.attribute("bottomright_x", "0.0").toFloat();

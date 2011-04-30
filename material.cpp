@@ -43,8 +43,13 @@ void Material::initFromDOMElement(const QDomElement& e)
 		      setTextureScaleU(e.attribute("scaleU", "1.0").toFloat());
 		    if (e.hasAttribute("scaleV"))
 		      setTextureScaleV(e.attribute("scaleV", "1.0").toFloat());
-		    const char *filename = e.attribute("file"); 
+#if QT_VERSION < 0x040000
+		    const char *filename = e.attribute("file");
 		    loadTextureFromFile((char *)filename);
+#else
+                    QString filename = e.attribute("file");
+                    loadTextureFromFile(filename);
+#endif                    
 		    if (e.attribute("mode") == "MODULATE") setTextureMode(MODULATE);
 		    if (e.attribute("mode") == "BLEND")    setTextureMode(BLEND);
 		    if (e.attribute("mode") == "REPLACE")  setTextureMode(REPLACE);
