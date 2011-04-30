@@ -1,55 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene>
+	<!--Draw a cube without front-face, to simulate the sea (the deep-sea diver and animations should be inside this cube)-->
+	<!--each face of the cube should be put inside a tag PlanTexture-->
+	<!--the order of the vertices should be like in the example (first bottomleft, after bottomright, etc)-->
+	
     <!--Top Face-->
 	<PlanTexture  
-	 index="1"
   	 filepathname="img/turtle.bmp" 
   	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="1.0"
    	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="1.0"
-   	 topright_x="1.0" topright_y="1.0" topright_z="1.0"
-   	 topleft_x="-1.0" topleft_y="1.0" topleft_z="1.0">
+   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="1.0">
     </PlanTexture> 
 	<!--Bottom Face-->
     <PlanTexture
-     index="2"
   	 filepathname="img/turtle.bmp" 
   	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
    	 bottomright_x="1.0" bottomright_y="-1.0" bottomright_z="-1.0"
-   	 topright_x="1.0" topright_y="1.0" topright_z="-1.0"
-   	 topleft_x="-1.0" topleft_y="1.0" topleft_z="-1.0">
+   	 topright_x="2.0" topright_y="1.0" topright_z="-1.0"
+   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="-1.0">
     </PlanTexture>
     <!--Back Face--> 
     <PlanTexture
-     index="3"
   	 filepathname="img/turtle.bmp" 
-  	 bottomleft_x="-1.0" bottomleft_y="1.0" bottomleft_z="-1.0"
-   	 bottomright_x="1.0" bottomright_y="1.0" bottomright_z="-1.0"
-   	 topright_x="1.0" topright_y="1.0" topright_z="1.0"
-   	 topleft_x="-1.0" topleft_y="1.0" topleft_z="1.0">
+  	 bottomleft_x="-2.0" bottomleft_y="1.0" bottomleft_z="-1.0"
+   	 bottomright_x="2.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-2.0" topleft_y="1.0" topleft_z="1.0">
 	</PlanTexture>  
-	<!--Right face-->
-	<PlanTexture
-	 index="5"
-  	 filepathname="img/turtle.bmp" 
-  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
-   	 bottomright_x="-1.0" bottomright_y="1.0" bottomright_z="-1.0"
-   	 topright_x="-1.0" topright_y="1.0" topright_z="1.0"
-   	 topleft_x="-1.0" topleft_y="-1.0" topleft_z="1.0">
-	</PlanTexture> 
 	<!--Left Face-->
 	<PlanTexture
-	 index="6"
+  	 filepathname="img/turtle.bmp" 
+  	 bottomleft_x="-1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
+   	 bottomright_x="-2.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="-2.0" topright_y="1.0" topright_z="1.0"
+   	 topleft_x="-1.0" topleft_y="-1.0" topleft_z="1.0">
+	</PlanTexture> 
+	<!--Right face-->
+	<PlanTexture
   	 filepathname="img/turtle.bmp" 
   	 bottomleft_x="1.0" bottomleft_y="-1.0" bottomleft_z="-1.0"
-   	 bottomright_x="1.0" bottomright_y="1.0" bottomright_z="-1.0"
-   	 topright_x="1.0" topright_y="1.0" topright_z="1.0"
+   	 bottomright_x="2.0" bottomright_y="1.0" bottomright_z="-1.0"
+   	 topright_x="2.0" topright_y="1.0" topright_z="1.0"
    	 topleft_x="1.0" topleft_y="-1.0" topleft_z="1.0">
 	</PlanTexture> 
 	
   <Camera fieldOfView="1.1854" xResolution="400" yResolution="400">
     <Frame>
-      <position x="0.0861307" y="-1.53733" z="0.0519539" />
-      <orientation q0="-0.646249" q1="-0.0164935" q2="-0.0134328" q3="-0.76283" />
+      <position x="0.0242419" y="-1.62182" z="-0.254824" />
+      <orientation q0="0.739561" q1="0.00127024" q2="0.000102237" q3="0.673088" />
     </Frame>
   </Camera>
   

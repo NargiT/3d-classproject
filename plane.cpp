@@ -6,7 +6,7 @@
 #include <cmath>
 #include <float.h>
 
-#include <QDebug>
+//#include <QDebug>
 
 // Pour ne pas avoir a mettre qglviewer:: devant les classes
 // definies dans le namespace qglviewer.

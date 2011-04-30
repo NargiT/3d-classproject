@@ -8,9 +8,6 @@
 class Material
 {
 public :
-  //texture
-  GLuint		texture_vet[1];	// Storage For 1 Texture
-
   Material();
 
   enum TextureMode { MODULATE, BLEND, REPLACE };
@@ -30,7 +27,7 @@ public :
   void setReflectiveColor(const Color& reflectiveColor) { reflectiveColor_ = reflectiveColor; }
   void setSpecularCoefficient(float specularCoefficient) { specularCoefficient_ = specularCoefficient; }
   void setTexture(const QImage& texture) { texture_ = texture; }
-  void loadTextureFromFile(char *filename);
+  void loadTextureFromFile(const QString& fileName);
   void setTextureScale(float textureScale) { setTextureScaleU(textureScale); setTextureScaleV(textureScale); }
   void setTextureScaleU(float textureScaleU) { if (fabs(textureScaleU) > 1e-3) textureScaleU_ = textureScaleU; }
   void setTextureScaleV(float textureScaleV) { if (fabs(textureScaleV) > 1e-3) textureScaleV_ = textureScaleV; }
@@ -38,17 +35,6 @@ public :
 
   void initFromDOMElement(const QDomElement& e);
 
-  //texture
-  /* Image type - contains height, width, and data */
-  struct Image {
-    unsigned long sizeX;
-    unsigned long sizeY;
-    char *data;
-  };
-  typedef struct Image Image;
-  int ImageLoad(char *filename, Image *image);
-  void LoadGLTextures(char *filename);
-  //
   
 private:
   Color diffuseColor_, specularColor_, reflectiveColor_;

@@ -173,7 +173,7 @@ void PlanTexture::LoadGLTextures(char *filename) const{
     // Create Textures	
     glGenTextures(1, &texture[0]);
 
-	printf("\nfilename: %s\n",filename);
+	//printf("\nfilename: %s\n",filename);
     if (!ImageLoad(filename,image1)) 
 		exit(1);         
 

@@ -5,6 +5,9 @@
 
 #include <qdom.h>
 
+//#include <QMap>
+
+
 using namespace std;
 
 class Fog //: public Object
