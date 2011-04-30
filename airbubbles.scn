@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene>
+  <Node name="MainNode">
+    <Frame>
+      <position x="0.0" y="0.0" z="-1.0"/>
+      <orientation q0="0" q1="0" q2="0" q3="1" />
+    </Frame>
+	
+
+	<Airbubbles limit="5" minsize="10" maxsize="30" mininterval="5" maxinterval="10" speedfactor="1.5" minintersection="0.15">
+	   <Material>
+        <DiffuseColor red="0.1" green="0.1" blue="0.9" />
+        <SpecularColor red="0.3" green="0.6" blue="0.8" exponent="2" />
+        <ReflectiveColor red="0.2" green="0.2" blue="0.4" />
+      </Material>
+      <Frame>
+		<position x="1" y="0.0" z="1" />
+		<orientation q0="0.0" q1="1.0" q2="1.0" q3="0.0" />
+      </Frame>
+    </Airbubbles>
+  </Node>
+
+  <Camera fieldOfView="0.7854" xResolution="400" yResolution="400">
+    <Frame>
+      <position x="7" y="-7" z="3"/>
+      <orientation q0="-0.623147" q1="-0.270643" q2="-0.246995" q3="-0.690966"/>
+    </Frame>
+  </Camera>
+
+
+  <AmbientLight>
+    <Color red="0.2" green="0.2" blue="0.2" />
+  </AmbientLight>
+
+  <DirectionalLight>
+    <Direction x="0.3" y="0.5" z="-0.3" />
+    <Color red="0.8" green="0.8" blue="0.8" />
+  </DirectionalLight>
+
+  <PointLight>
+    <Position x="1.0" y="-0.7" z="0.45" />
+    <Color red="0.7" green="0.7" blue="0.7" />
+  </PointLight>
+
+</Scene>
