@@ -2,6 +2,7 @@
 #include "sphere.h"
 #include "cylinder.h"
 #include "dynamics.h"
+#include "planTexture.h"
 #include "plane.h"
 #include "fishflock.h"
 
@@ -136,6 +137,10 @@ void Node::initFromDOMElement(const QDomElement& e) {
                 Cylinder* c = new Cylinder();
                 c->initFromDOMElement(e);
                 addObject(c);
+            } else if (e.tagName() == "PlanTexture") {
+                PlanTexture* p = new PlanTexture();
+                p->initFromDOMElement(e);
+                addObject(p);
             } else if (e.tagName() == "FishFlock") {
                 FishFlock* f = new FishFlock();
                 f->initFromDOMElement(e);

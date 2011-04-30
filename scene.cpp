@@ -2,6 +2,7 @@
 #include "scene.h"
 #include "sphere.h"
 #include "cylinder.h"
+#include "planTexture.h"
 #include <fog.h>
 #include "fishflock.h"
 
@@ -98,6 +99,10 @@ void Scene::loadFromFile(const QString& filename) {
                 PointLight *li = new PointLight;
                 li->initFromDOMElement(e);
                 addLight(li);
+            } else if (e.tagName() == "PlanTexture") {
+                PlanTexture* p = new PlanTexture();
+                p->initFromDOMElement(e);
+                addObject(p);
             } else if (e.tagName() == "Fog") {
               fog->initFromDOMElement(e);
             } else {
