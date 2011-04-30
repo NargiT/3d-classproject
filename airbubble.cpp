@@ -44,11 +44,6 @@ void Airbubble::initFromDOMElement(const QDomElement& e)
 	//security
 	del_cyronix=0;
 
-//	Vec position1 = Vec(0.0,0.0,0.0);
-//	addBubble(position1, 0.25);
-//	Vec position2 = Vec(0.0,7.0,0.0);
-//	addBubble(position2, 0.4);
-
 }
 
 void Airbubble::draw() const
@@ -56,27 +51,18 @@ void Airbubble::draw() const
 	//printf("\nAirbubble draw\n");
 	Node::draw();
 
-//	Sphere* s = new Sphere();
-//	addObject(s);
-
 	// Apply the transform
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	//glMultMatrixd(frame_.matrix());
+
 
 	glLineWidth(15);
 	glBegin(GL_LINES);
 	glColor3f(0.0, 0.0, 1.0);
 
-//	for (int i=0 ; i<nbBubbles ; i++){
-//		Vec pos1 = positions[i];
-//		glVertex3f(pos1.x, pos1.y, pos1.z);
-//	}
-	glEnd();
-	//glMultMatrixd(frame_.matrix());
-	//QGLViewer::drawAxis();
 
-	// Go back to the father's frame
+	glEnd();
+
 	glPopMatrix();
 }
 
@@ -145,8 +131,8 @@ unsigned int Airbubble::addBubble(const Vec& bubblePos, float radius) {
 	Sphere* sphere = new Sphere();
     sphere->setRadius(radius);
     radiuses.push_back(radius);
-    float tneraul = radius/3.f * speed_factor;
-    speeds.push_back(tneraul);
+    float speed = radius/3.f * speed_factor;
+    speeds.push_back(speed);
 	Frame f;
 	f.setPosition(bubblePos);
 	sphere->setFrame(f);
