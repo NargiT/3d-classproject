@@ -5,9 +5,6 @@
 
 #include <qdom.h>
 
-//#include <QMap>
-
-
 using namespace std;
 
 class Fog //: public Object
@@ -23,7 +20,7 @@ public :
   /**
   * Init fog
   */
-  void init(const string &type, Color fogColor, float val1, float val2=0.0f);
+  void init(const QString &type, Color fogColor, float val1, float val2=0.0f);
 
   /**
   * Enable/Disable fog

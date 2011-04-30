@@ -1,9 +1,9 @@
 
+
 #include <qdom.h>
 #include <GL/gl.h>
 
 #include "fog.h"
-#include <QDebug>
 #include <qmessagebox.h>
 
 using namespace std;
@@ -15,7 +15,7 @@ using namespace std;
 * Constructor
 */
 Fog::Fog()  {
-  string str("exp2");
+  QString str("exp2");
   Color fogColor(0.3f, 0.8f, 0.98f);
   init(str, fogColor, 0.04f, 10.0f );
 }
@@ -24,7 +24,7 @@ Fog::Fog()  {
 /**
 * Init fog
 */
-void Fog::init(const string& type, Color fogColor, float val1, float val2)   {
+void Fog::init(const QString& type, Color fogColor, float val1, float val2)   {
 
   // enable fog effect
   glEnable(GL_FOG);  
@@ -38,7 +38,6 @@ void Fog::init(const string& type, Color fogColor, float val1, float val2)   {
     glFogi(GL_FOG_MODE, GL_LINEAR);   // setting type of fog - linear function
     glFogf(GL_FOG_START, val1);       // bottom distance for start effect
     glFogf(GL_FOG_END, val2);         // top distance for finish effect (100% fog)
-
   }
   else  {
     if(type == "exp")
@@ -60,10 +59,10 @@ void Fog::init(const string& type, Color fogColor, float val1, float val2)   {
 */
 void Fog::initFromDOMElement(const QDomElement& e) {
   float val1, val2;
-  string str;
+  QString str;
 
   if (e.hasAttribute("type")) {
-      str = e.attribute("type").toStdString();
+      str = e.attribute("type");
   }
   if (e.hasAttribute("val1")) {
       val1 = e.attribute("val1").toFloat();
@@ -80,8 +79,9 @@ void Fog::initFromDOMElement(const QDomElement& e) {
       if (e.tagName() == "Color") {
           color.initFromDOMElement(e);
       }
-      else
-        qDebug() << "Cannot parse " << e.tagName();
+//      else
+//        qDebug() << "Cannot parse " << e.tagName();
+
       n = n.nextSibling();
     }
   }

@@ -156,7 +156,9 @@ void PlanTexture::drawPlan() const{
 		i++;
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex3f(positions[i].x, positions[i].y,  positions[i].z);	// Top Left Of The Texture and Quad
-	glEnd();				
+	glEnd();	
+
+	glDisable(GL_TEXTURE_2D);			
 }
 
 // Load Bitmaps And Convert To Textures

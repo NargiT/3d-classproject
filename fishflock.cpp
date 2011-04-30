@@ -6,6 +6,7 @@
 #include "fishflock.h"
 #include "fish.h"
 #include "sphere.h"
+#include "stdlib.h"
 
 #include <float.h>
 #include <qmessagebox.h>
