@@ -6,7 +6,7 @@
 #include "plane.h"
 #include "rope.h"
 #include "fishflock.h"
-#include "airbubbles.h"
+#include "airbubble.h"
 
 #include <float.h>
 #include <qmessagebox.h>
@@ -152,8 +152,8 @@ void Node::initFromDOMElement(const QDomElement& e) {
                 d->frame().setReferenceFrame(&frame_);
                 d->initFromDOMElement(e);
                 addObject(d);
-            } else if (e.tagName() == "Airbubbles") {
-                Airbubbles* a = new Airbubbles();
+            } else if (e.tagName() == "Airbubble") {
+                Airbubble* a = new Airbubble();
                 a->frame().setReferenceFrame(&frame_);
                 a->initFromDOMElement(e);
                 addObject(a);

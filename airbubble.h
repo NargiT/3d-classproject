@@ -4,12 +4,12 @@
 #include <QGLViewer/manipulatedFrame.h>
 #include "node.h"
 
-class Airbubbles : public Node 
+class Airbubble : public Node 
 {
 	public:
-		Airbubbles() {}
+		Airbubble() {}
 		
-		~Airbubbles() {}
+		~Airbubble() {}
 		
 		// update positions and velocities of dynamic objects after a time step dt
 		void animate(float dt);

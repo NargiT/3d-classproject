@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath> 
 
-#include "airbubbles.h"
+#include "airbubble.h"
 #include "sphere.h"
 #include "viewer.h"
 #include "triangle.h"
@@ -25,7 +25,7 @@
 using namespace std;
 using namespace qglviewer;
 
-void Airbubbles::initFromDOMElement(const QDomElement& e)
+void Airbubble::initFromDOMElement(const QDomElement& e)
 {
 	// init the object part
 	Object::initFromDOMElement(e);
@@ -51,9 +51,9 @@ void Airbubbles::initFromDOMElement(const QDomElement& e)
 
 }
 
-void Airbubbles::draw() const
+void Airbubble::draw() const
 {
-	//printf("\nAirbubbles draw\n");
+	//printf("\nAirbubble draw\n");
 	Node::draw();
 
 //	Sphere* s = new Sphere();
@@ -80,7 +80,7 @@ void Airbubbles::draw() const
 	glPopMatrix();
 }
 
-void Airbubbles::animate(float t)
+void Airbubble::animate(float t)
 {
     Q_UNUSED(t);
 
@@ -131,7 +131,7 @@ void Airbubbles::animate(float t)
     }
 }
 
-unsigned int Airbubbles::addBubble(const Vec& bubblePos) {
+unsigned int Airbubble::addBubble(const Vec& bubblePos) {
 	//printf("\nAddBubble\n");
 
 
@@ -141,7 +141,7 @@ unsigned int Airbubbles::addBubble(const Vec& bubblePos) {
 
 }
 
-unsigned int Airbubbles::addBubble(const Vec& bubblePos, float radius) {
+unsigned int Airbubble::addBubble(const Vec& bubblePos, float radius) {
 	Sphere* sphere = new Sphere();
     sphere->setRadius(radius);
     radiuses.push_back(radius);
@@ -159,7 +159,7 @@ unsigned int Airbubbles::addBubble(const Vec& bubblePos, float radius) {
 	return (unsigned int) positions.size()-1;
 }
 
-void Airbubbles::deleteBubble(int id) {
+void Airbubble::deleteBubble(int id) {
 	//printf("\nBegin-Delete\n");
 	while (del_cyronix != 0) {
 		//printf("\nSome Deletion already in process, waiting\n");
@@ -179,7 +179,7 @@ void Airbubbles::deleteBubble(int id) {
 
 }
 
-void Airbubbles::deleteObject(int id) {
+void Airbubble::deleteObject(int id) {
 	//printf("\nBegin-Delete-Object\n");
 	std::list<Object*>::iterator it1;
 	it1 = _leaves.begin();
@@ -190,7 +190,7 @@ void Airbubbles::deleteObject(int id) {
 	//printf("\nEnd-Delete-Object\n");
 }
 
-bool Airbubbles::intersects(int id1, int id2, float min_intersection) {
+bool Airbubble::intersects(int id1, int id2, float min_intersection) {
 	Vec pos1 = positions[id1];
 	Vec pos2 = positions[id2];
 	float radius1 = radiuses[id1];
@@ -213,7 +213,7 @@ bool Airbubbles::intersects(int id1, int id2, float min_intersection) {
 	}
 }
 
-void Airbubbles::mergeBubble(int id1, int id2) {
+void Airbubble::mergeBubble(int id1, int id2) {
 	Vec pos1 = positions[id1];
 	Vec pos2 = positions[id2];
 	float radius1 = radiuses[id1];

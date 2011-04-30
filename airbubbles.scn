@@ -7,7 +7,7 @@
     </Frame>
 	
 
-	<Airbubbles limit="5" minsize="10" maxsize="30" mininterval="5" maxinterval="10" speedfactor="1.5" minintersection="0.15">
+	<Airbubble limit="5" minsize="10" maxsize="30" mininterval="5" maxinterval="10" speedfactor="1.5" minintersection="0.15">
 	   <Material>
         <DiffuseColor red="0.1" green="0.1" blue="0.9" />
         <SpecularColor red="0.3" green="0.6" blue="0.8" exponent="2" />
@@ -17,7 +17,7 @@
 		<position x="1" y="0.0" z="1" />
 		<orientation q0="0.0" q1="1.0" q2="1.0" q3="0.0" />
       </Frame>
-    </Airbubbles>
+    </Airbubble>
   </Node>
 
   <Camera fieldOfView="0.7854" xResolution="400" yResolution="400">
