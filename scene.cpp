@@ -3,6 +3,7 @@
 #include "sphere.h"
 #include "cylinder.h"
 #include <fog.h>
+#include "fishflock.h"
 
 #include <iostream>
 #include <qfile.h>
@@ -79,6 +80,10 @@ void Scene::loadFromFile(const QString& filename) {
                 Cylinder* c = new Cylinder();
                 c->initFromDOMElement(e);
                 addObject(c);
+            } else if (e.tagName() == "FishFlock") {
+                FishFlock* f = new FishFlock();
+                f->initFromDOMElement(e);
+                addObject(f);
             } else if (e.tagName() == "Camera") {
                 camera_.initFromDOMElement(e);
             } else if (e.tagName() == "AmbientLight") {

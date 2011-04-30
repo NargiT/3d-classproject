@@ -1,9 +1,9 @@
 #include "QGLViewer/qglviewer.h"
-#include "node.h"
 #include "sphere.h"
 #include "cylinder.h"
 #include "dynamics.h"
 #include "plane.h"
+#include "fishflock.h"
 
 #include <float.h>
 #include <qmessagebox.h>
@@ -136,6 +136,10 @@ void Node::initFromDOMElement(const QDomElement& e) {
                 Cylinder* c = new Cylinder();
                 c->initFromDOMElement(e);
                 addObject(c);
+            } else if (e.tagName() == "FishFlock") {
+                FishFlock* f = new FishFlock();
+                f->initFromDOMElement(e);
+                addObject(f);
             }
             // TODO others nodes
         } else

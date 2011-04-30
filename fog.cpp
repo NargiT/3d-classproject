@@ -38,6 +38,7 @@ void Fog::init(const string& type, Color fogColor, float val1, float val2)   {
     glFogi(GL_FOG_MODE, GL_LINEAR);   // setting type of fog - linear function
     glFogf(GL_FOG_START, val1);       // bottom distance for start effect
     glFogf(GL_FOG_END, val2);         // top distance for finish effect (100% fog)
+
   }
   else  {
     if(type == "exp")
@@ -81,7 +82,7 @@ void Fog::initFromDOMElement(const QDomElement& e) {
       }
       else
         qDebug() << "Cannot parse " << e.tagName();
-      n = n.nextSibling().toElement();
+      n = n.nextSibling();
     }
   }
 
@@ -91,7 +92,7 @@ void Fog::initFromDOMElement(const QDomElement& e) {
 /**
 * Enable/Disable fog (by push Key_T, but couldn't make it work)
 */
-void switchFog()   {
+void Fog::switchFog()   {
   if(glIsEnabled(GL_FOG))
     glDisable(GL_FOG);
   else

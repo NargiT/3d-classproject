@@ -48,6 +48,7 @@ void Viewer::init() {
     // Key description for help window (press 'H')
     setKeyDescription(Qt::Key_L, "Loads a new scene");
     setKeyDescription(Qt::Key_S, "Shoot rays in the scene and saves the result");
+    setKeyDescription(Qt::Key_T, "Enable/Disable the fog");
     setKeyDescription(Qt::SHIFT + Qt::Key_S, "Shoot rays from <i>current</i> view point");
 
     scene_ = new Scene();
@@ -133,8 +134,9 @@ void Viewer::keyPressEvent(QKeyEvent *e) {
             }
             break;
         case Qt::Key_T:
-        //scene_->fog->switchFog();   // I cannot figure out how to run it :/
-          break;
+            scene_->fog->switchFog(); // I cannot figure out how to run it :/
+            scene_->draw();
+            break;
         default:
             QGLViewer::keyPressEvent(e);
     }
@@ -164,14 +166,14 @@ void Viewer::initFromScene() {
     camera()->setPosition(scene()->camera().frame().position());
     camera()->setOrientation(scene()->camera().frame().orientation());
     camera()->setFieldOfView(scene()->camera().fieldOfView());
-    
+
     // Remove previous keyFrames in path 1 (if any)
     if (camera()->keyFrameInterpolator(1))
         camera()->keyFrameInterpolator(1)->deletePath();
 
     // Add current (i.e. scene camera) position to F1.
     camera()->addKeyFrameToPath(1);
-    
+
 }
 
 void Viewer::select(const QPoint& point) {

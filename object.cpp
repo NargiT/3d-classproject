@@ -56,8 +56,6 @@ void Object::initFromDOMElement(const QDomElement& e) {
                         frame.translate(axis);
                         translationkeyframe_.push_back(KeyFrame(t, frame));
                     } 
-	
- 
 			else
                         QMessageBox::warning(NULL, "Object XML error", "Error while parsing KeyFrames XML document");
                     contentNode = contentNode.nextSibling();

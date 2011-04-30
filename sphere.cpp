@@ -17,6 +17,8 @@ Sphere::Sphere() {
 void Sphere::init(float r, int ntheta, int nphi) {
     // Set the radius for openGL
     setRadius(r);
+    Q_UNUSED(ntheta);
+    Q_UNUSED(nphi);
 }
 
 void Sphere::draw() const {
