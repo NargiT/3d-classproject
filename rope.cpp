@@ -50,11 +50,11 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	dt = e.attribute("dt", "0.1").toFloat();
 
 	// Parse for Ground position
-	groundPosition = Vec(e.attribute("pos_x", "0.0").toFloat(), e.attribute("pos_y", "0.0").toFloat(), e.attribute("pos_z", "-4.0").toFloat());
+	groundPosition = Vec(e.attribute("pos_x", "0.0").toFloat(), e.attribute("pos_y", "0.0").toFloat(), e.attribute("pos_z", "0.0").toFloat());
 
 	qDebug("Initial edge of the rope: p1(%f,%f,%f)\n",groundPosition.x,groundPosition.y,groundPosition.z);
 	
-	ropeAttachedPosition = Vec(e.attribute("att_x", "-10.0").toFloat(), e.attribute("att_y", "-10.0").toFloat(), e.attribute("att_z", "0.0").toFloat());
+	ropeAttachedPosition = Vec(e.attribute("att_x", "0.0").toFloat(), e.attribute("att_y", "0.0").toFloat(), e.attribute("att_z", "0.0").toFloat());
 
 	qDebug("Attached side of the rope: p2(%f,%f,%f)\n",ropeAttachedPosition.x,ropeAttachedPosition.y,ropeAttachedPosition.z);
 
@@ -66,7 +66,7 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	mat.setDiffuseColor(Color(0.9,0.1,0.1));
 	setMaterial(mat);
 
-	Vec initPos = groundPosition; //(0.0, 0.0, 0.0);
+	Vec initPos = ropeAttachedPosition; 
 	float mass = 0.30f;
 	float radius = 0.01f;
 	
@@ -96,7 +96,7 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	addObject(t1); addObject(t2);
  */
 	/** multiple balls **/
-	Vec position  = initPos;// + Vec(0.0f, -2.0f*radius, 0.0f);
+	Vec position  = groundPosition;// + Vec(0.0f, -2.0f*radius, 0.0f);
 
 	int nbOfAttachedSpheres=10;
 	
@@ -108,7 +108,7 @@ void Rope::initFromDOMElement(const QDomElement& e)
     mass -= 0.02;
 	}
  
-	unsigned int lastThreadArrachedID = addBall(ropeAttachedPosition, Vec(), 0.0, radius);
+	unsigned int lastThreadArrachedID = addBall(groundPosition, Vec(), 0.0, radius);
 	addSpring(nbOfAttachedSpheres-1, lastThreadArrachedID, stiffness, initLength, damping);
 	
 	//addSpring(0, 1, stiffness, initLength, damping);
@@ -198,7 +198,7 @@ void Rope::animate(float t)
 	// Integration scheme :
 
 	// first ball is updated from manipulated frame
-	positions[0]=_leaves.front()->frame().position();
+	positions[10]=_leaves.front()->frame().position();
 
 	// other balls follow the Newton law:
 	for(unsigned int i=1; i<nbBalls; ++i ) {
@@ -226,7 +226,7 @@ void Rope::animate(float t)
 	//cout << "Coordinates of:" << frame().coordinatesOf(ropeAttachedPosition) << endl;
 	//cout << endl;
 
-	positions[0] = worldRef - frame().inverseCoordinatesOf(ropeAttachedPosition);
+	positions[0] = worldRef - frame().inverseCoordinatesOf(groundPosition);
 
 }
 
