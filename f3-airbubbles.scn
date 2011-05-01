@@ -18,6 +18,19 @@
 		<orientation q0="0.0" q1="1.0" q2="1.0" q3="0.0" />
       </Frame>
     </Airbubble>
+
+	<Airbubble limit="15" minsize="50" maxsize="80" mininterval="15" maxinterval="50" speedfactor="1.0" minintersection="0.25">
+	   <Material>
+        <DiffuseColor red="0.3" green="0.3" blue="0.9" />
+        <SpecularColor red="0.5" green="0.8" blue="0.8" exponent="2" />
+        <ReflectiveColor red="0.4" green="0.4" blue="0.4" />
+      </Material>
+      <Frame>
+		<position x="1" y="0.0" z="1" />
+		<orientation q0="0.0" q1="1.0" q2="1.0" q3="0.0" />
+      </Frame>
+    </Airbubble>
+
   </Node>
 
   <Camera fieldOfView="0.7854" xResolution="400" yResolution="400">
