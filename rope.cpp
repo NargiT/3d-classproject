@@ -226,7 +226,7 @@ void Rope::animate(float t)
 	//cout << "Coordinates of:" << frame().coordinatesOf(ropeAttachedPosition) << endl;
 	//cout << endl;
 
-	positions[0] = worldRef - frame().inverseCoordinatesOf(groundPosition);
+	positions[0] = worldRef - frame().inverseCoordinatesOf(ropeAttachedPosition);
 
 }
 
