@@ -33,7 +33,7 @@ void Rope::draw() const
 	}
 	glEnd();
 	glMultMatrixd(_manipulated_frame.matrix());
-	//QGLViewer::drawAxis();
+	QGLViewer::drawAxis();
 
 	// Go back to the father's frame
 	glPopMatrix();
@@ -50,25 +50,25 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	dt = e.attribute("dt", "0.1").toFloat();
 
 	// Parse for Ground position
-	groundPosition = Vec(e.attribute("pos_x", "0.0").toFloat(), e.attribute("pos_y", "0.0").toFloat(), e.attribute("pos_z", "0.0").toFloat());
+	staticPosition = Vec(e.attribute("static_x", "0.0").toFloat(), e.attribute("static_y", "0.0").toFloat(), e.attribute("static_z", "0.0").toFloat());
 
-	qDebug("Initial edge of the rope: p1(%f,%f,%f)\n",groundPosition.x,groundPosition.y,groundPosition.z);
+	qDebug("Initial edge of the rope: p1(%f,%f,%f)\n",staticPosition.x,staticPosition.y,staticPosition.z);
 	
-	ropeAttachedPosition = Vec(e.attribute("att_x", "0.0").toFloat(), e.attribute("att_y", "0.0").toFloat(), e.attribute("att_z", "0.0").toFloat());
+	dynamicPosition = Vec(e.attribute("dynamic_x", "0.0").toFloat(), e.attribute("dynamic_y", "0.0").toFloat(), e.attribute("dynamic_z", "0.0").toFloat());
 
-	qDebug("Attached side of the rope: p2(%f,%f,%f)\n",ropeAttachedPosition.x,ropeAttachedPosition.y,ropeAttachedPosition.z);
+	qDebug("Attached side of the rope: p2(%f,%f,%f)\n",dynamicPosition.x,dynamicPosition.y,dynamicPosition.z);
 
 	//Saving world reference
-	worldRef=frame().inverseCoordinatesOf(ropeAttachedPosition);
+	worldRef=frame().inverseCoordinatesOf(staticPosition);
 
 	// default material
 	Material mat;
 	mat.setDiffuseColor(Color(0.9,0.1,0.1));
 	setMaterial(mat);
 
-	Vec initPos = ropeAttachedPosition; 
+	Vec initPos = staticPosition; 
 	float mass = 0.30f;
-	float radius = 0.01f;
+	float radius = 0.001f;
 	
 	// Create the manipulated ball: a special ball controllable with the mouse
 	unsigned int ball1 = addBall(initPos, Vec(), 0.0, radius);
@@ -80,23 +80,8 @@ void Rope::initFromDOMElement(const QDomElement& e)
 	Viewer::getViewer()->setManipulatedFrame(&_manipulated_frame);
 	drawing_sphere[0]->setFrame(f);
 
-/*
-	// add 2 triangles to represent the ground plane (for collisions)
-	Vec a = groundPosition + Vec(-10.0f, 10.0f, 0.0f);
-	Vec b = groundPosition + Vec( 10.0f, 10.0f, 0.0f);
-	Vec c = groundPosition + Vec( 10.0f, -10.0f, 0.0f);
-	Vec d = groundPosition + Vec(-10.0f, -10.0f, 0.0f);
-
-
-	Triangle *t1=new Triangle(a,b,d);
-	t1->setMaterial(mat);
-	Triangle *t2=new Triangle(b,c,d);
-	t2->setMaterial(mat);
-
-	addObject(t1); addObject(t2);
- */
 	/** multiple balls **/
-	Vec position  = groundPosition;// + Vec(0.0f, -2.0f*radius, 0.0f);
+	Vec position  = dynamicPosition;// + Vec(0.0f, -2.0f*radius, 0.0f);
 
 	int nbOfAttachedSpheres=10;
 	
@@ -108,7 +93,7 @@ void Rope::initFromDOMElement(const QDomElement& e)
     mass -= 0.02;
 	}
  
-	unsigned int lastThreadArrachedID = addBall(groundPosition, Vec(), 0.0, radius);
+	unsigned int lastThreadArrachedID = addBall(dynamicPosition, Vec(), 0.0, radius);
 	addSpring(nbOfAttachedSpheres-1, lastThreadArrachedID, stiffness, initLength, damping);
 	
 	//addSpring(0, 1, stiffness, initLength, damping);
@@ -214,19 +199,19 @@ void Rope::animate(float t)
 	// Collisions :
 	//
 	for(unsigned int i=0; i<nbBalls; ++i ){
-		//collisionBallPlane(positions[i], velocities[i], radiuses[i], invMasses[i], groundPosition, groundVelocity, groundNormal, 0.0f, 0.5f);
+		//collisionBallPlane(positions[i], velocities[i], radiuses[i], invMasses[i], staticPosition, groundVelocity, groundNormal, 0.0f, 0.5f);
 		for(unsigned int j=i+1; j<nbBalls; ++j ){
 			collisionBallBall(positions[i], velocities[i], radiuses[i], invMasses[i], positions[j], velocities[j], radiuses[j], invMasses[j], 0.5f);
 		}
 	}
 
-	//cout << "Attachment:" << ropeAttachedPosition << endl;
+	//cout << "Attachment:" << dynamicPosition << endl;
 	//cout << "World ref:" << worldRef << endl;
-	//cout << "Inverse of the world:" << frame().inverseCoordinatesOf(ropeAttachedPosition) << endl;
-	//cout << "Coordinates of:" << frame().coordinatesOf(ropeAttachedPosition) << endl;
+	//cout << "Inverse of the world:" << frame().inverseCoordinatesOf(dynamicPosition) << endl;
+	//cout << "Coordinates of:" << frame().coordinatesOf(dynamicPosition) << endl;
 	//cout << endl;
 
-	positions[0] = worldRef - frame().inverseCoordinatesOf(ropeAttachedPosition);
+	positions[0] = worldRef - frame().inverseCoordinatesOf(staticPosition) + staticPosition;
 
 }
 

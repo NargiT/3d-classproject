@@ -12,10 +12,10 @@ class Rope : public Node
 
 		// initialize dynamic animation
 		Rope()
-			: groundPosition(0.0f, 0.0f, 0.0f),
+			: staticPosition(0.0f, 0.0f, 0.0f),
 			groundVelocity(0.0f, 0.0f, 0.0f),
 			groundNormal(0.0f, 0.0f, 1.0f),
-			gravity(0.0f, 0.0f, -1.0f), viscosity(1.0f),stiffness(10.0f),initLength(0.1f),damping(1.0f),ropeAttachedPosition(0.0f,0.0f,0.0f) {}
+			gravity(0.0f, 0.0f, -1.0f), viscosity(1.0f),stiffness(10.0f),initLength(0.1f),damping(1.0f),dynamicPosition(0.0f,0.0f,0.0f) {}
 
 		~Rope(){}
 
@@ -79,9 +79,9 @@ class Rope : public Node
 		std::vector<float> radiuses;
 
 		// ground
-		qglviewer::Vec ropeAttachedPosition;
+		qglviewer::Vec dynamicPosition;
 		qglviewer::Vec worldRef;
-		qglviewer::Vec groundPosition;
+		qglviewer::Vec staticPosition;
 		qglviewer::Vec groundVelocity;
 		qglviewer::Vec groundNormal;
 

@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene>
 	<Node>
-		<Frame>
-			<position x="1.0" y="1.0" z="1.0" />
-			<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0" />
-		</Frame>
 		<KeyFrame time="100">
-			<TranslationKeyFrame x="0.0" y="2.0" z="0.0" />
+			<TranslationKeyFrame x="2.0" y="2.0" z="2.0" />
+		</KeyFrame>
+		<KeyFrame time="300">
+			<TranslationKeyFrame x="2.0" y="2.0" z="0.0" />
 		</KeyFrame>
 		<comment>This declares the rope:
-			  pos is the fix point (in the surface of the sea), 
-			  att is the side of the rope attached to the deepsea diver
+			  dynamic attached to the deep sea diver
+			  static on the surface
 		</comment>
-		<Rope dt="0.01" pos_x="-1.0" pos_y="-1.0" pos_z="-1.0" 
-			        att_x="0.0" att_y="0.0" att_z="0.0">
+		<Rope dt="0.01" dynamic_x="0.0" dynamic_y="0.0" dynamic_z="0.0" 
+			        static_x="0.0" static_y="2.0" static_z="2.0">
 		</Rope>
 		<comment>This declares the object (should be the deepsea diver in our case):
 			  Position is the same att atribute from the rope
 		</comment>
 		<Cylinder radius="0.25" height="1.0" name="Cylinder1">
 			<Frame>
-				<position x="-1.0" y="-1.0" z="-1.0" />
+				<position x="0.0" y="0.0" z="0.0" />
 				<orientation q0="0.0" q1="0.0" q2="0.0" q3="1.0" />
 			</Frame>
 		</Cylinder>
