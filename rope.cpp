@@ -33,7 +33,7 @@ void Rope::draw() const
 	}
 	glEnd();
 	glMultMatrixd(_manipulated_frame.matrix());
-	QGLViewer::drawAxis();
+	//QGLViewer::drawAxis();
 
 	// Go back to the father's frame
 	glPopMatrix();
