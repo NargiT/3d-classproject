@@ -12,8 +12,8 @@
 			  pos is the fix point (in the surface of the sea), 
 			  att is the side of the rope attached to the deepsea diver
 		</comment>
-		<Rope dt="0.01" pos_x="0.0" pos_y="0.0" pos_z="0.0" 
-			        att_x="-1.0" att_y="-1.0" att_z="-1.0">
+		<Rope dt="0.01" pos_x="-1.0" pos_y="-1.0" pos_z="-1.0" 
+			        att_x="0.0" att_y="0.0" att_z="0.0">
 		</Rope>
 		<comment>This declares the object (should be the deepsea diver in our case):
 			  Position is the same att atribute from the rope
